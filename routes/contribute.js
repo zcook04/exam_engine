@@ -1,37 +1,46 @@
-const mongoose = require('mongoose')
+const express = require('express')
+const router = express.Router()
+const config = require('config')
+const RadioQuestion = require('../models/Exam')
 
-const radioQuestionSchema = new mongoose.Schema ({
-    exam: { type: String, required: true },
-    category: { type: String, required: true },
-    question: {type: String, required: true},
-    questionType: {type: String, required: true},
-    isPublished: {type: Boolean, required: true, default: false},
-    prompt1: {type: String, required: true},
-    prompt2: {type: String, required: true},
-    prompt3: {type: String, required: true},
-    prompt4: {type: String, required: true},
-    answers: {type: [Boolean], required: true},
-    rating: [],
-    explainations: [{ 
-        id: String,
-        questionId: String,
-        userId: String,
-        text: String,
-        ratings:  [Number],
-        comments: [String]
-    }],
-    date: {
-        type: Date,
-        default: Date.now()
+const connectDB = require('../config/db')
+
+
+router.post('/radio', async (req, res) => {
+
+    const { exam, category, question, questionType,
+    isPublished, prompt1, prompt2, prompt3, prompt4,
+    answers, explainations} = req.body
+    
+    try {
+        let q = await RadioQuestion.findOne({ question })
+        if(q) {
+            return res.status(400).json({ msg: 'Questions already exists'})
+        }
+
+
+        radioQuestion = new RadioQuestion({
+            exam, category, question, questionType,
+            isPublished, prompt1, prompt2, prompt3, prompt4,
+            answers, explainations
+        })
+            
+        await radioQuestion.save()
+        res.send('Question Saved')
+
+    } catch (err) {
+        console.error(err.message)
+        res.send(500).json({msg: "Server Error"})
     }
 })
 
-const RadioQuestion = mongoose.model('RadioQuestion', radioQuestionSchema)
-
-module.exports = RadioQuestion
+module.exports = router
 
 
-//TESTING---CREATE DB ENTRIES BELOW
+
+
+
+// TESTING---CREATE DB ENTRIES BELOW
 
 // const question1 = new RadioQuestion({
 //     exam: 'CCNA',
