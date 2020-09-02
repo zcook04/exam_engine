@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const radioQuestionSchema = new mongoose.Schema ({
+const questionSchema = new mongoose.Schema ({
     exam: { type: String, required: true },
     category: { type: String, required: true },
     question: {type: String, required: true},
@@ -26,9 +26,9 @@ const radioQuestionSchema = new mongoose.Schema ({
     }
 })
 
-const RadioQuestion = mongoose.model('RadioQuestion', radioQuestionSchema)
+const Question = mongoose.model('Question', questionSchema)
 
-module.exports = RadioQuestion
+module.exports = Question
 
 
 //TESTING---CREATE DB ENTRIES BELOW

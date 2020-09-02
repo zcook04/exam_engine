@@ -1,0 +1,19 @@
+.prompt-container {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid black;
+    padding: 0px;
+    margin-bottom: .2rem;
+}
+
+.prompt-container p {
+    margin: 0;
+    width: 90%;
+}
+
+.prompt-container input {
+    margin: 0;
+    width: 10%;
+}
