@@ -1,36 +1,35 @@
 const express = require('express')
 const router = express.Router()
 const config = require('config')
-const RadioQuestion = require('../models/Exam')
+const Question = require('../models/Exam')
 
 const connectDB = require('../config/db')
 
 
-router.post('/radio', async (req, res) => {
+router.post('/question', async (req, res) => {
 
     const { exam, category, question, questionType,
-    isPublished, prompt1, prompt2, prompt3, prompt4,
-    answers, explainations} = req.body
+    isPublished, prompts, explainations} = req.body
     
+        
+
     try {
-        let q = await RadioQuestion.findOne({ question })
+        let q = await Question.findOne({ question })
         if(q) {
             return res.status(400).json({ msg: 'Questions already exists'})
         }
 
-
-        radioQuestion = new RadioQuestion({
+        
+        contributeQuestion = new Question({
             exam, category, question, questionType,
-            isPublished, prompt1, prompt2, prompt3, prompt4,
-            answers, explainations
+            isPublished, prompts, explainations
         })
-            
-        await radioQuestion.save()
+
+        await contributeQuestion.save()
         res.send('Question Saved')
 
     } catch (err) {
-        console.error(err.message)
-        res.send(500).json({msg: "Server Error"})
+        res.sendStatus(500).json({msg: err})
     }
 })
 

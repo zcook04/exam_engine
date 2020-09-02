@@ -14,6 +14,7 @@ import "./Exam.css"
 
 const Exam = () => {
 
+
     const questions = [{
                     exam: 'CCNA',
                     category: 'Switching',
@@ -85,7 +86,17 @@ const Exam = () => {
                         date: new Date()
                 }]
     
-    
+    const shuffleArray = (arr) => {
+        var currentIndex = arr.length, temporaryValue, randomIndex;
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            temporaryValue = arr[currentIndex];
+            arr[currentIndex] = arr[randomIndex];
+            arr[randomIndex] = temporaryValue;
+        }
+        return arr;
+    }
     
     const getPrompts = (currentQuestion) => {
         const prompts = []
@@ -110,7 +121,7 @@ const Exam = () => {
     <div className="exam-container">
         <form>
             {prompts.map(prompt => {
-                return <ExamPrompt key={prompt.value} selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} prompt={prompt.text} />
+                return <ExamPrompt key={prompt.value} value={prompt.value} selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} prompt={prompt.text} />
             })}
         </form>
     </div>

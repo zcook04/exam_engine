@@ -6,11 +6,48 @@ const questionSchema = new mongoose.Schema ({
     question: {type: String, required: true},
     questionType: {type: String, required: true},
     isPublished: {type: Boolean, required: true, default: false},
-    prompt1: {type: String, required: true},
-    prompt2: {type: String, required: true},
-    prompt3: {type: String, required: true},
-    prompt4: {type: String, required: true},
-    answers: {type: [Boolean], required: true},
+    prompts: {
+        prompt1: { 
+            text: {
+                type: String, required: true
+            },
+            value: {
+                type: Number, required: true
+            },
+            isAnswer: {
+                type: Boolean, required: true
+            }},
+        prompt2: { 
+            text: {
+                type: String, required: true
+            },
+            value: {
+                type: Number, required: true
+            },
+            isAnswer: {
+                type: Boolean, required: true
+            }},
+        prompt3: { 
+            text: {
+                type: String, required: true
+            },
+            value: {
+                type: Number, required: true
+            },
+            isAnswer: {
+                type: Boolean, required: true
+            }},
+        prompt4: { 
+            text: {
+                type: String, required: true
+            },
+            value: {
+                type: Number, required: true
+            },
+            isAnswer: {
+                type: Boolean, required: true
+            }}
+    },
     rating: [],
     explainations: [{ 
         id: String,

@@ -44,7 +44,6 @@ router.get('/:exam', async (req, res) => {
                 let shuffled = shuffleArray(q)
                 while (shuffled.length > category[1]) {
                     shuffled.pop()
-                    console.log(shuffled)
                 }
                 return shuffled
             } else {
@@ -56,7 +55,10 @@ router.get('/:exam', async (req, res) => {
 
     const filteredQuestions = await filterQuestions(allExamQuestions, categories)
 
-    res.send(filteredQuestions)
+    let finalQuestions = shuffleArray(filteredQuestions.flat())
+
+    res.send(finalQuestions)
+
     })
 
 module.exports = router
