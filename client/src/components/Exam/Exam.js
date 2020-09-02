@@ -12,7 +12,7 @@ import "./Exam.css"
 
 //Pull Question prompts from current question
 
-const Exam = async () => {
+const Exam = () => {
 
     const questions = [{
                     exam: 'CCNA',
