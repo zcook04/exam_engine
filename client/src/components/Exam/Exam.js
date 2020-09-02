@@ -12,8 +12,7 @@ import "./Exam.css"
 
 //Pull Question prompts from current question
 
-const Exam = () => {
-
+const Exam = async () => {
 
     const questions = [{
                     exam: 'CCNA',
@@ -108,13 +107,13 @@ const Exam = () => {
             prompts.push(currentQuestion.prompt3)
         if(currentQuestion.prompt4)
             prompts.push(currentQuestion.prompt4)
-
-
         return prompts
     }
+
     const [index, setIndex] = useState(0)
     const [currentQuestion, setCurrentQuestion] = useState(questions[index])
     const [selectedAnswer, setSelectedAnswer] = useState('')
+
     const prompts = getPrompts(currentQuestion)
 
   return (
