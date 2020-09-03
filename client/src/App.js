@@ -8,26 +8,25 @@ import Register from './components/Auth/register'
 import Login from './components/Auth/login'
 
 import AuthState from './context/auth/authState'
-import NavState from './context/nav/navState'
+import AlertState from './context/alert/alertState'
 
 function App() {
   return (
-    <AuthState>
-      <NavState>
-        <Router>
-          <Navbar />
-          <Header />
-            <Switch>
+    <AuthState><AlertState>
 
-              <Route exact path='/' component={Exam} />
-              <Route exact path='/exam' component={Exam} />
-              <Route exact path='/register' component={Register} />
-              <Route exact path='/login' component={Login} />
-            </Switch>
-            <div style={{height: "2000px"}}> </div>
-        </Router>
-      </NavState>
-    </AuthState>
+      <Router>
+        <Navbar />
+        <Header />
+          <Switch>
+
+            <Route exact path='/' component={Exam} />
+            <Route exact path='/exam' component={Exam} />
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/login' component={Login} />
+          </Switch>
+          <div style={{height: "2000px"}}> </div>
+      </Router>
+      </AlertState></AuthState>
   );
 }
 

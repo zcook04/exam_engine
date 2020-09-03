@@ -3,5 +3,7 @@
     height: 40vh;
     position: relative;
     background: url('/images/AdobeStock_332094489.jpeg') center center/cover;
+    border-bottom: solid 2px #fff;
+    margin-bottom: 1rem
 }
 

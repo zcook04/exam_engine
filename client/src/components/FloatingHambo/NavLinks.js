@@ -8,13 +8,14 @@ const NavLinks = (props) => {
     const { navOpen, setNavOpen } = props
 
     const wrapperClass = navOpen ? "navlinks-wrapper" : "navlinks-wrapper hidden"
+    const containerClass = navOpen ? "navlinks-container" : "navlinks-container hidden"
 
     const navlinkHandler = () => {
         navOpen ? setNavOpen(false) : setNavOpen(true)
     }
 
     return (
-        <div className="navlinks-container">
+        <div className={containerClass}>
             <div className={wrapperClass}>
                 <h1>Welcome</h1>
                 <ul className="navlinks-ul">

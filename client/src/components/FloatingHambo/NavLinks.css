@@ -5,8 +5,12 @@
     color: #fff;
     display: flex;
     overflow: hidden;
-    z-index: 10;
+    z-index: 15;
     top: 0;
+}
+
+.navlinks-container.hidden {
+    z-index: -1
 }
 
 .navlinks-container h1 {
@@ -58,6 +62,7 @@
 .navlinks-wrapper.hidden {
     transform: scale(.5) translateX(300%) translateY(-300%);
     transition: all .3s ease-in-out;
+    z-index: -1;
 }
 
 .navlinks-wrapper {
