@@ -3,14 +3,18 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    border: 1px solid black;
-    padding: 0px;
+    border: 2px solid #00b7c2;
+    border-radius: 5px;
+    padding: 10px;
     margin-bottom: .2rem;
+    margin: 10px;
+    background: #000;
 }
 
 .prompt-container p {
     margin: 0;
     width: 90%;
+    color: #FFF;
 }
 
 .prompt-container input {

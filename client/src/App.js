@@ -29,7 +29,7 @@ function App() {
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
           </Switch>
-          <div style={{height: "2000px"}}> </div>
+          {/* <div style={{height: "2000px"}}> </div>  */}
       </Router>
       </AlertState></AuthState>
   );

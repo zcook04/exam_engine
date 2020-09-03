@@ -2,4 +2,37 @@
     max-width: 75%;
     min-height: 50vh;
     margin: auto;
+
+    border-radius: 5px;
+    padding: 3rem;
+}
+
+.exam-container h3 {
+    margin-left: .5rem;
+    color: #00b7c2;
+}
+
+.exam-bottom-bar {
+    display: flex;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+}
+
+.exam-nav {
+    border: 2px solid #00b7c2;
+    border-radius: 5px;
+    background: #000;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.exam-nav:hover {
+    opacity: .8;
+    background: #111;
+}
+
+#exam.hidden {
+    display: none;
 }
