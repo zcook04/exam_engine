@@ -7,10 +7,12 @@
     overflow: hidden;
     z-index: 15;
     top: 0;
+    transition: all .3s ease-in-out;
 }
 
 .navlinks-container.hidden {
-    z-index: -1
+    z-index: -1;
+    transition: all .3s ease-in-out;
 }
 
 .navlinks-container h1 {

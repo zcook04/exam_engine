@@ -1,0 +1,66 @@
+.form-container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    justify-content: center;
+}
+
+.form-container h2 {
+    padding: .5rem;
+}
+
+.form-group input {
+    width: 100%;
+    margin: .5rem;
+    padding: 0;
+    border: 2px solid #FFF;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.form-group input:focus {
+    border: 2px solid skyblue;
+}
+
+.login-button {
+    background: #ccc;
+}
+
+.button {
+    color: skyblue;
+    cursor: pointer;
+}
+
+.login-form p {
+    text-align: center;
+    display: block;
+    font-size: 1rem;
+}
+
+.register-form p {
+    text-align: center;
+    display: block;
+    font-size: 1rem;
+}
+
+.text-primary {
+    color: skyblue;
+}
+
+.register-form.hidden {
+    display: none;
+}
+
+.login-form {
+    transition: all .5s ease-in-out;
+}
+
+.register-form {
+    transition: all .3s ease-in-out;
+}
+
+.login-form.hidden, register-form.hidden{
+    transition: all .3s ease-in-out;
+    display: none;
+}

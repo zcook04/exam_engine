@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import AlertContext from '../../context/alert/alertContext'
 
 const Register = () => {
     const [user, setUser] = useState({
