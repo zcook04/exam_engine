@@ -1,0 +1,30 @@
+.menu-overlay-container {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.menu-overlay {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    transform: translateX(150%) translateY(-150%);
+    background: linear-gradient(to bottom right, hsla(183, 100%, 38%, 0.658), hsla(204, 77%, 26%, 0.548));
+    transition: all .3s ease-in-out;
+}
+
+.menu-overlay.open {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: 00b7c2;
+    background: linear-gradient(to bottom right, #00b7c2, #0f4c75);
+    box-shadow: -15px 15px 35px #0f4c75;
+    transform: translateX(0%) translateY(0%) scale(3);
+    border-radius: 100%;
+    transition: all .3s ease-in-out;
+}
