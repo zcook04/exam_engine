@@ -1,11 +1,16 @@
 .menu-overlay-container {
-    position: absolute;
-    z-index: 5;
+    position: fixed;
+    z-index: -1;
     display: flex;
     justify-content: flex-end;
     width: 100%;
     overflow: hidden;
     height: 100vh;
+    top: 0;
+}
+
+.menu-overlay-container.open {
+    z-index: 10;
 }
 
 .menu-overlay {
@@ -15,6 +20,8 @@
     transform: translateX(150%) translateY(-150%);
     background: linear-gradient(to bottom right, hsla(183, 100%, 38%, 0.658), hsla(204, 77%, 26%, 0.548));
     transition: all .3s ease-in-out;
+    opacity: 75%;
+    z-index: 0;
 }
 
 .menu-overlay.open {
@@ -27,4 +34,5 @@
     transform: translateX(0%) translateY(0%) scale(3);
     border-radius: 100%;
     transition: all .3s ease-in-out;
+    z-index: 15;
 }

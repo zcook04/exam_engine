@@ -1,10 +1,12 @@
 .navlinks-container {
-    position: absolute;
+    position: fixed;
     height: 100vh;
     width: 100vw;
     color: #fff;
     display: flex;
     overflow: hidden;
+    z-index: 10;
+    top: 0;
 }
 
 .navlinks-container h1 {
@@ -13,12 +15,12 @@
 
 .navlinks-wrapper {
     margin: auto;
-    margin: auto;
     z-index: 100;
     width: 50%;
     text-align: center;
     display: flex;
     flex-direction: column;
+
 }
 
 .navlinks-ul {
@@ -59,7 +61,7 @@
 }
 
 .navlinks-wrapper {
-    transform: scale(1) translateX(0) translateY(0);
+    transform: scale(1) translateX(0%) translateY(0%);
     transition: all .3s ease-in-out;
 }
 

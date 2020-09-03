@@ -1,4 +1,7 @@
 .header-main {
     width: 100%;
-    height: 115px;
+    height: 40vh;
+    position: relative;
+    background: url('/images/AdobeStock_332094489.jpeg') center center/cover;
 }
+

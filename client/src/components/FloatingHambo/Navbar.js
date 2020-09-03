@@ -11,7 +11,7 @@ import './Navbar.css'
      const [showNavLinks, setShowNavLinks] = useState("navlinks-wrapper hidden")
 
      let burgerMenuBtnClasses = navOpen ? "menu-btn open" : "menu-btn"
-     let overlayClasses = navOpen ? "menu-overlay open" : "menu-overlay"
+     let overlayClasses = navOpen ? "open" : ""
      
 
      const hamburgerHandler = () => {
@@ -26,11 +26,8 @@ import './Navbar.css'
     return (
         <React.Fragment>
             <NavLinks navOpen={navOpen} setNavOpen={setNavOpen} />
-            <div className="navbar-main">
-                <Hamburger hamburgerHandler={hamburgerHandler} burgerMenuBtnClasses={burgerMenuBtnClasses} />
-                <Overlay overlayClasses={overlayClasses} />
-            </div>
-            
+            <Hamburger hamburgerHandler={hamburgerHandler} burgerMenuBtnClasses={burgerMenuBtnClasses} />                
+            <Overlay overlayClasses={overlayClasses} />
         </React.Fragment>
     )
 }

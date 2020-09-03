@@ -1,10 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const config = require('config')
 const Question = require('../models/Exam')
-
-const connectDB = require('../config/db')
-
 
 router.post('/question', async (req, res) => {
 
@@ -19,7 +15,6 @@ router.post('/question', async (req, res) => {
             return res.status(400).json({ msg: 'Questions already exists'})
         }
 
-        
         contributeQuestion = new Question({
             exam, category, question, questionType,
             isPublished, prompts, explainations

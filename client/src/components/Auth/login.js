@@ -6,7 +6,7 @@ const Login = () => {
         password: ''
     })
 
-    const { name, email, password, password2 } = user
+    const { email, password } = user
 
     const onChange = e => setUser({ ...user, [e.target.name]: e.target.value })
 
@@ -28,7 +28,7 @@ const Login = () => {
             <label htmlFor="password">Password</label>
             <input type="password" name="password" value={password} onChange={onChange} />
         </div>
-        <input type="submit" value="login" className="btn btn-primary"/>
+        <input type="submit" value="login" onSubmit={onSubmit}className="btn btn-primary"/>
         </div>
     )
 }

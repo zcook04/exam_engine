@@ -38,7 +38,7 @@ const Register = () => {
             <label htmlFor="password2">Confirm Password</label>
             <input type="password" name="password2" value={password2} onChange={onChange} />
         </div>
-        <input type="submit" value="register" className="btn btn-primary"/>
+        <input type="submit" value="register" onSubmit={onSubmit} className="btn btn-primary"/>
         </div>
     )
 }
