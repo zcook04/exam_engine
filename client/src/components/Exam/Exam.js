@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
-import { v4 as uuidv4 } from 'uuid'
 
 import ExamPrompts from "./ExamPrompts"
 
@@ -15,7 +14,7 @@ const Exam = () => {
     const [index, setIndex] = useState(0)
     const [currentQuestion, setCurrentQuestion] = useState(questions[index])
     const [prompts, setPrompts] = useState([])
-    const [selectedAnswer, setSelectedAnswer] = useState('')
+    const [answers, setAnswers] = useState()
 
 
     const shuffle = (arr) => {
@@ -61,8 +60,6 @@ const Exam = () => {
         }
     },[questions, index])
     
-    const examLoaded = currentQuestion == "" ? "hidden" : "" 
-
     const nextHandler = async () => {
         if((questions.length -1)!== (index)) {
             try {
@@ -92,6 +89,7 @@ const Exam = () => {
         setQuestionSearch('?switching=3') //NEEDS REWORKED TO BE DYNAMIC
     }
     
+    const examLoaded = questions.length > 0 ? "" : "hidden" 
 
   return (
     <div className="exam-container">
@@ -99,11 +97,15 @@ const Exam = () => {
             <form id="exam" className={examLoaded}>
             <h3>{currentQuestion && currentQuestion.question}</h3>
             {prompts.map((prompt) => {
-                console.log(prompt)
                 return <ExamPrompts  
-                            key={uuidv4()} 
+                            key={prompt._id} 
+                            id={currentQuestion._id}
                             isAnswer={prompt.prompt.isAnswer}
-                            text={prompt.prompt.text}/>
+                            text={prompt.prompt.text}
+                            setAnswers={setAnswers}
+                            answers={answers}
+                            currentQuestion={currentQuestion}
+                            />
                 })}
             <div className="exam-bottom-bar">
                 <span className="exam-nav" onClick={prevHandler}>Previous Question</span>
