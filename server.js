@@ -1,13 +1,25 @@
 const express = require('express')
-const db = require('./config/db')
 const connectDB = require('./config/db')
+const cors = require('cors')
+// require('./testdb/db')
 
 app = express()
 
+const whitelist = ['http://localhost']
+const corsOptions = {
+    origin: function (origin, callback) {
+        if(whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
 // CONNECT TO DB
 connectDB()
 
 // INIT MIDDLEWARE
+app.use(cors())
 app.use(express.json({ extended: false }))
 
 app.use(express.static(__dirname + '/public'))

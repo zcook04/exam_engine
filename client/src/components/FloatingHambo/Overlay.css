@@ -22,7 +22,7 @@
     transform: translateX(150%) translateY(-150%);
     background: linear-gradient(to bottom right, hsla(183, 100%, 38%, 0.658), hsla(204, 77%, 26%, 0.548));
     transition: all .3s ease-in-out;
-    opacity: 75%;
+    opacity: 92%;
     z-index: 0;
 }
 

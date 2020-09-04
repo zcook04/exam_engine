@@ -6,7 +6,6 @@ import Header from './components/FloatingHambo/Header'
 import Exam from './components/Exam/Exam'
 import Alerts from './components/Layout/Alerts'
 
-import Register from './components/Auth/Register'
 import Login from './components/Auth/Login'
 
 import AuthState from './context/auth/authState'
@@ -26,7 +25,6 @@ function App() {
             
             <Route exact path='/' component={Exam} />
             <Route exact path='/exam' component={Exam} />
-            <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
           </Switch>
           {/* <div style={{height: "2000px"}}> </div>  */}

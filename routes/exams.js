@@ -6,17 +6,17 @@ router.get('/:exam', async (req, res) => {
     //PULL EXAM, CATEGORIES AND QUANTITY FROM URL
     const exam = req.params.exam.toUpperCase()
     const categories = Object.entries(req.query)
-    
-
     //GET ALL QUESTIONS FOR THE SPECIFIED EXAM
     let allExamQuestions = []
     try {
-        await Question.find({exam}, (err, result) =>{
+        await Question.find({"exam": exam}, (err, result) =>{
+            
             if(err){
                 console.log(err)
                 return
             }
             allExamQuestions = result
+            
         })} catch(err) {
             console.log('TryCaught:' +err)
         }
@@ -53,11 +53,13 @@ router.get('/:exam', async (req, res) => {
         return filteredQuestions.filter(question => !undefined || !null)
     }
 
-    const filteredQuestions = await filterQuestions(allExamQuestions, categories)
-
-    let finalQuestions = shuffleArray(filteredQuestions.flat())
-
-    res.send(finalQuestions)
+    if(categories.length >= 1) {
+        const filteredQuestions = await filterQuestions(allExamQuestions, categories)
+        const finalQuestions = shuffleArray(filteredQuestions.flat())
+        res.send(finalQuestions)
+    } else {
+        res.send(allExamQuestions)
+    }
 
     })
 

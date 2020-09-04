@@ -20,15 +20,18 @@
 }
 
 .form-group input:focus {
-    border: 2px solid skyblue;
+    border: 2px solid #00b7c2;
 }
 
 .login-button {
-    background: #ccc;
+    background: #00b7c2;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: .15rem;
 }
 
 .button {
-    color: skyblue;
+    color: #00b7c2;
     cursor: pointer;
 }
 
@@ -45,7 +48,7 @@
 }
 
 .text-primary {
-    color: skyblue;
+    color: #00b7c2;
 }
 
 .register-form.hidden {

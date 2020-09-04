@@ -1,0 +1,10 @@
+.alert {
+    font-size: 1.4rem;
+    border: 2px solid red;
+    background: black;
+    text-align: center;
+    padding: .25rem;
+    max-width: 50%;
+    margin: auto;
+    margin-bottom: 1rem;
+}

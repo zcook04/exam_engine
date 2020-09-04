@@ -4,18 +4,18 @@ import "./ExamPrompt.css"
 
 
 
-const ExamPrompt = (props) => {
-  const { value, selectedAnswer, setSelectedAnswer } = props
+const ExamPrompts = (props) => {
   const changeHandler = (e) => {
     setSelectedAnswer(e.target.value)
-    console.log(e.target.value)
   }
+
+  const { value, text, prompt, selectedAnswer, setSelectedAnswer} = props
     return (
       <div className="prompt-container">
         <input value={value} name="Question" onChange={changeHandler} type="radio"></input>
-        <p>{props.prompt}</p>
+        <p>{text}</p>
       </div>
     );
   }
   
-export default ExamPrompt;
+export default ExamPrompts;
