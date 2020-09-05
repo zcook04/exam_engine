@@ -36,3 +36,7 @@
 #exam.hidden {
     display: none;
 }
+
+#exam-bottom-bar.hidden {
+    display: none;
+}

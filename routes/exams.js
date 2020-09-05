@@ -63,4 +63,24 @@ router.get('/:exam', async (req, res) => {
 
     })
 
+    router.get('/:exam/:id', async (req, res) => {
+        //PULL EXAM, CATEGORIES AND QUANTITY FROM URL
+        const id = req.params.id
+        //GET ALL QUESTIONS FOR THE SPECIFIED EXAM
+        let question
+        try {
+            await Question.find({_id: id}, (err, result) =>{
+                
+                if(err){
+                    console.log(err)
+                    return
+                }
+                question = result
+                
+            })} catch(err) {
+                console.log('TryCaught:' +err)
+            }
+            res.send(question[0])
+        })
+
 module.exports = router

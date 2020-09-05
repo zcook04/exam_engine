@@ -1,0 +1,19 @@
+.exam-review-container {
+    padding: 10px;
+    margin: 10px;
+}
+
+.exam-score {
+    padding: 0;
+    margin-left: 0 !important;
+}
+
+.wrong-answers {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.correct-answers {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}

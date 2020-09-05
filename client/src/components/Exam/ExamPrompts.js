@@ -7,8 +7,6 @@ import "./ExamPrompt.css"
 const ExamPrompts = (props) => {
   const {text, isAnswer, answers, setAnswers, id, currentQuestion} = props
 
-
-
   const changeHandler = (e) => {
     if(e.target.value && isAnswer) {
       const currentAnswers = { ... answers }
@@ -22,7 +20,7 @@ const ExamPrompts = (props) => {
     setAnswers(currentAnswers) 
     }
   }
-  
+
     return (
       <div className="prompt-container">
         <input value={id} name={currentQuestion} onChange={changeHandler} type="radio" />
