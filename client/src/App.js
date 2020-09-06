@@ -15,6 +15,7 @@ import Login from './components/Auth/Login'
 
 import AuthState from './context/auth/authState'
 import AlertState from './context/alert/alertState'
+import PrivateRoute from './components/Routing/PrivateRoute'
 
 import './index.css'
 
@@ -36,8 +37,8 @@ function App() {
             <Route exact path='/exam' component={Exam} />
             <Route exact path='/flashcards' component={Flashcards} />
             <Route exact path='/login' component={Login} />
-            <Route exact path='/forum' component={Forum} />
-            <Route exact path='/contribute' component={Contribute} />
+            <PrivateRoute exact path='/forum' component={Forum} />
+            <PrivateRoute exact path='/contribute' component={Contribute} />
           </Switch>
           {/* <div style={{height: "2000px"}}> </div>  */}
       </Router>
