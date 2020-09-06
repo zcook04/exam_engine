@@ -7,6 +7,9 @@ import Exam from './components/Exam/Exam'
 import Alerts from './components/Layout/Alerts'
 import setAuthToken from './utils/setAuthToken'
 import Contribute from './components/Contribute/Contribute'
+import Flashcards from './components/Flashcards/Flashcards'
+import Home from './components/Home/Home'
+import Forum from './components/Forum/Forum'
 
 import Login from './components/Auth/Login'
 
@@ -29,9 +32,11 @@ function App() {
         <Alerts />
           <Switch>
             
-            <Route exact path='/' component={Exam} />
+            <Route exact path='/' component={Home} />
             <Route exact path='/exam' component={Exam} />
+            <Route exact path='/flashcards' component={Flashcards} />
             <Route exact path='/login' component={Login} />
+            <Route exact path='/forum' component={Forum} />
             <Route exact path='/contribute' component={Contribute} />
           </Switch>
           {/* <div style={{height: "2000px"}}> </div>  */}
