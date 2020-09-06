@@ -3,6 +3,12 @@
     margin: 10px;
 }
 
+.exam-review-container.hidden {
+    padding: 10px;
+    margin: 10px;
+    display: none;
+}
+
 .exam-score {
     padding: 0;
     margin-left: 0 !important;

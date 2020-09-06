@@ -4,7 +4,7 @@ import ReviewQuestion from './ReviewQuestion'
 import './ReviewExam.css'
 
 const ReviewExam = memo((props) => {
-    const { answers, exam } = props.answers ? props : {answers: {"noanswers": false}}
+    const { answers, exam, inReview } = props.answers ? props : {answers: {"noanswers": false}}
 
     //SORT CORRECT/WRONG ANSWERS INTO SEPERATE ARRAYS AND COUNTS
     const sortAnswers = () => {
@@ -34,7 +34,7 @@ const ReviewExam = memo((props) => {
 
     return (
         
-        <div className="exam-review-container">
+        <div className={inReview ? "exam-review-container" : "exam-review-container hidden"}>
             <h3 className="exam-score">You scored: {examScore}%</h3>
 
             <div className="wrong-answers">

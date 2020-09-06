@@ -22,7 +22,7 @@ const Exam = () => {
     const [currentQuestion, setCurrentQuestion] = useState(questions[index])
     const [prompts, setPrompts] = useState([])
     const [answers, setAnswers] = useState()
-    const [inReview, setInReview] = useState(true)
+    const [inReview, setInReview] = useState(false)
 
     // USED TO RANDOMIZE ORDER OF QUESTIONS RECEIVED FROM DB
     const shuffle = (arr) => {
@@ -48,6 +48,7 @@ const Exam = () => {
             let response = await axios.get(`http://localhost:5000/api/exams/${exam}`)
             const data = await response.data
             setQuestions(shuffle(data))
+            setInReview(false)
         } catch(err) {
             console.log(err)
         }
@@ -138,7 +139,7 @@ const Exam = () => {
             </form>
 
         {/* REVIEW EXAM */}
-        {inReview && <ReviewExam answers={answers} exam={exam} />}
+        <ReviewExam answers={answers} exam={exam} inReview={inReview} />
        
     </div>
   );

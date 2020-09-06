@@ -98,10 +98,12 @@ const Login = (props) => {
                     <div className="form-group">
                         <input type="submit" value="Login" onClick={onSignin} className="login-button"/>
                     </div>
-                    <p>Don't have an account?  <span className="button" onClick={registrationHandler}>Register now!</span></p>
                 </form>
+                    <p>Don't have an account?  <span className="button" onClick={registrationHandler}>Register now!</span></p>
+                
             </div>
             <div className={"register-form " + showRegistration}>
+            <form>
                 <h2>Welcome <span className="text-primary"> {user.name}</span></h2>
                 <div className="form-group">
                     <input placeholder="Name" type="text" name="name" value={name} onChange={onChange}/>
@@ -117,8 +119,9 @@ const Login = (props) => {
                 </div>
                 <div className="form-group">
                         <input type="submit" value="Register" onClick={onRegister} className="login-button"/>
-                    </div>
-            <p>Already have an account?  <span className="button" onClick={registrationHandler}>Sign-in now!</span></p>
+                </div>
+            </form>
+                <p>Already have an account?  <span className="button" onClick={registrationHandler}>Sign-in now!</span></p>
             </div>
         </div>
     )
