@@ -32,8 +32,7 @@ const AuthState = props => {
         }
         
         try{
-            const res = await axios.get('/api/auth')
-
+            const res = await axios.get('http://localhost:5000/api/auth')
             dispatch(
                 {
                     type: USER_LOADED,
@@ -69,9 +68,30 @@ const AuthState = props => {
     }
 
     //LOGIN USER
-    const login = () => console.log('login')
+    const login = async formData => {
+        const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    try {
+        const res = await axios.post('http://localhost:5000/api/auth', formData, config)
+        dispatch({
+            type: LOGIN_SUCCESS,
+            payload: res.data
+            })
+
+        loadUser()
+    } catch(err) {
+        dispatch({
+            type: LOGIN_FAIL,
+            payload: err.response.data.msg
+            })
+        }
+    }
     //LOGOUT
-    const logout = () => console.log('logout')
+    const logout = () => dispatch({ type: LOGOUT })
     //CLEAR ERRORS
     const clearErrors = () => dispatch({ type: CLEAR_ERRORS})
 
@@ -81,7 +101,7 @@ const AuthState = props => {
                 token: state.token,
                 isAuthenticated: state.isAuthenticated,
                 loading: state.loading,
-                user: state.token,
+                user: state.user,
                 error: state.error,
                 register,
                 loadUser,

@@ -1,14 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import axios from 'axios'
 
 import ExamPrompts from "./ExamPrompts"
 import ReviewExam from "./ReviewExam"
+
+import AuthContext from "../../context/auth/authContext"
 
 import "./Exam.css"
 
 
 
 const Exam = () => {
+    const authContext = useContext(AuthContext)
+
     const [exam, setExam] = useState('ccna')
     const [categories, setCategories] = useState(null)
     const [questions, setQuestions] = useState([])
@@ -32,6 +36,11 @@ const Exam = () => {
         }
         return arr;
     }
+
+    useEffect(() => {
+        authContext.loadUser()
+        // eslint-disable-next-line
+    }, [])
 
     // GETS QUESTIONS FROM DATABASE.  REQUIRES AN EXAM AND OPTIONAL CATEGORIES
     const getQuestions = async () => {

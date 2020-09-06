@@ -9,7 +9,7 @@ const Login = (props) => {
     const authContext = useContext(AuthContext)
 
     const { setAlert } = alertContext
-    const { register, error, clearErrors, isAuthenticated } = authContext
+    const { register, login, error, clearErrors, isAuthenticated } = authContext
 
     useEffect(() => {
         if(isAuthenticated) {
@@ -17,6 +17,11 @@ const Login = (props) => {
         }
 
         if(error === 'User already exists') {
+            setAlert(error)
+            clearErrors()
+        }
+
+        if(error === 'Invalid Credentials') {
             setAlert(error)
             clearErrors()
         }
@@ -56,7 +61,14 @@ const Login = (props) => {
 
     const onSignin = e => {
         e.preventDefault()
-        console.log('Login Submit')
+        if(email === '' || password === '') {
+            setAlert('Email and Password is required')
+        } else {
+            login({
+                email,
+                password
+            })
+        }
     }
 
     const showRegistration = registered ? "hidden" : ""

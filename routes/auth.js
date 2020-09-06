@@ -5,13 +5,21 @@ const { check, validationResult } = require('express-validator')
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const config = require('config')
+const auth = require('../middleware/auth')
 
 
 //ROUTE     GET api/auth
 //DESC      LOG IN USER AND GET JWT-TOKEN
 //ACCESS    PUBLIC
-router.get('/', (req, res) => {
-    res.send('Get a logged in user')
+router.get('/', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password')
+        res.json(user)
+    } catch (err) {
+        if(err)
+            console.error(err.message)
+            res.status(500).send('Server Error')
+    }
 })
 
 router.post('/', [

@@ -6,6 +6,7 @@ import Header from './components/FloatingHambo/Header'
 import Exam from './components/Exam/Exam'
 import Alerts from './components/Layout/Alerts'
 import setAuthToken from './utils/setAuthToken'
+import Contribute from './components/Contribute/Contribute'
 
 import Login from './components/Auth/Login'
 
@@ -31,6 +32,7 @@ function App() {
             <Route exact path='/' component={Exam} />
             <Route exact path='/exam' component={Exam} />
             <Route exact path='/login' component={Login} />
+            <Route exact path='/contribute' component={Contribute} />
           </Switch>
           {/* <div style={{height: "2000px"}}> </div>  */}
       </Router>
