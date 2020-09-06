@@ -94,7 +94,6 @@ const Exam = () => {
 
     // IF NO QUESTIONS HIDE THE BOTTOM EXAM-NAVIGATION
     const bottomBarClass = questions.length > 0 ? 'exam-bottom-bar' : 'exam-bottom-bar hidden'
-    const reviewClass = inReview ? 'exam-review-container' : 'exam-review-container hidden'
 
   return (
     <div className="exam-container">

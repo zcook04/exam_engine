@@ -9,13 +9,12 @@ const ExamPrompts = (props) => {
 
   const changeHandler = (e) => {
     if(e.target.value && isAnswer) {
-      const currentAnswers = { ... answers }
+      const currentAnswers = { ...answers }
       currentAnswers[e.target.value] = true
     setAnswers(currentAnswers)    
     }
-
     if(e.target.value && !isAnswer) {
-      const currentAnswers = { ... answers }
+      const currentAnswers = { ...answers }
       currentAnswers[e.target.value] = false
     setAnswers(currentAnswers) 
     }

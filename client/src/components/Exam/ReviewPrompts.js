@@ -5,7 +5,7 @@ import "./ReviewPrompts.css"
 
 
 const ExamPrompts = (props) => {
-  const {text, isAnswer, id} = props
+  const {text, isAnswer} = props
   
   const isAnswerClass = isAnswer ? 'review-prompt-container is-answer' : 'review-prompt-container not-answer'
     return (

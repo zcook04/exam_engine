@@ -22,7 +22,7 @@ const ReviewQuestion = (props) => {
             setPrompts([...data[0].prompts])
         }
         getQuestion()
-    },[])
+    },[exam, id])
 
     const reviewTitleClasses = wasAnswer ? 'review-question-question is-answer' : 'review-question-question not-answser'
 

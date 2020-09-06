@@ -5,6 +5,7 @@ import Navbar from './components/FloatingHambo/Navbar'
 import Header from './components/FloatingHambo/Header'
 import Exam from './components/Exam/Exam'
 import Alerts from './components/Layout/Alerts'
+import setAuthToken from './utils/setAuthToken'
 
 import Login from './components/Auth/Login'
 
@@ -12,6 +13,10 @@ import AuthState from './context/auth/authState'
 import AlertState from './context/alert/alertState'
 
 import './index.css'
+
+if(localStorage.token) {
+  setAuthToken(localStorage.token)
+}
 
 function App() {
   return (
