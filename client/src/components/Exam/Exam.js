@@ -5,6 +5,7 @@ import ExamPrompts from "./ExamPrompts"
 import ReviewExam from "./ReviewExam"
 
 import AuthContext from "../../context/auth/authContext"
+import ExamContext from "../../context/exam/examContext"
 
 import "./Exam.css"
 
@@ -12,9 +13,11 @@ import "./Exam.css"
 
 const Exam = () => {
     const authContext = useContext(AuthContext)
+    const examContext = useContext(ExamContext)
+
+    const { inReview, endReview, startReview, shuffle, categories } = examContext
 
     const [exam, setExam] = useState('ccna')
-    const [categories, setCategories] = useState(null)
     const [questions, setQuestions] = useState([])
     const [questionSearch, setQuestionSearch] = useState('')
 
@@ -22,20 +25,8 @@ const Exam = () => {
     const [currentQuestion, setCurrentQuestion] = useState(questions[index])
     const [prompts, setPrompts] = useState([])
     const [answers, setAnswers] = useState()
-    const [inReview, setInReview] = useState(false)
 
-    // USED TO RANDOMIZE ORDER OF QUESTIONS RECEIVED FROM DB
-    const shuffle = (arr) => {
-        var currentIndex = arr.length, temporaryValue, randomIndex;
-        while (0 !== currentIndex) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-            temporaryValue = arr[currentIndex];
-            arr[currentIndex] = arr[randomIndex];
-            arr[randomIndex] = temporaryValue;
-        }
-        return arr;
-    }
+
 
     useEffect(() => {
         authContext.loadUser()
@@ -48,7 +39,7 @@ const Exam = () => {
             let response = await axios.get(`http://localhost:5000/api/exams/${exam}`)
             const data = await response.data
             setQuestions(shuffle(data))
-            setInReview(false)
+            endReview()
         } catch(err) {
             console.log(err)
         }
@@ -99,7 +90,7 @@ const Exam = () => {
     const reviewHandler = () => {
         setQuestions([])
         setIndex(0)
-        setInReview(true)
+        startReview()
     }
 
     // IF NO QUESTIONS HIDE THE BOTTOM EXAM-NAVIGATION

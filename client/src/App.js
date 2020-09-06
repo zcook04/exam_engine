@@ -10,11 +10,12 @@ import Contribute from './components/Contribute/Contribute'
 import Flashcards from './components/Flashcards/Flashcards'
 import Home from './components/Home/Home'
 import Forum from './components/Forum/Forum'
-
 import Login from './components/Auth/Login'
 
 import AuthState from './context/auth/authState'
 import AlertState from './context/alert/alertState'
+import ExamState from './context/exam/examState'
+
 import PrivateRoute from './components/Routing/PrivateRoute'
 
 import './index.css'
@@ -25,14 +26,13 @@ if(localStorage.token) {
 
 function App() {
   return (
-    <AuthState><AlertState>
+    <AuthState><AlertState><ExamState>
 
       <Router>
         <Navbar />
         <Header />
         <Alerts />
           <Switch>
-            
             <Route exact path='/' component={Home} />
             <Route exact path='/exam' component={Exam} />
             <Route exact path='/flashcards' component={Flashcards} />
@@ -42,7 +42,8 @@ function App() {
           </Switch>
           {/* <div style={{height: "2000px"}}> </div>  */}
       </Router>
-      </AlertState></AuthState>
+
+      </ExamState></AlertState></AuthState>
   );
 }
 
