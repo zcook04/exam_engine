@@ -5,4 +5,13 @@
 .review-question-question {
     color: black;
     margin-left: 12px !important;
+    text-align: center;
+}
+
+.review-question-question.not-answser {
+    color: rgb(224, 23, 23);
+}
+
+.review-question-question.is-answer {
+    color: rgb(0, 204, 0);
 }

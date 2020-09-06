@@ -41,14 +41,14 @@ const ReviewExam = memo((props) => {
             {
                 wrongAnswers.map(answer => {
                     return <div key={answer} className="review-question-wrong">
-                    <ReviewQuestion key={answer} id={answer} exam={exam}/>
+                    <ReviewQuestion wasAnswer={false} key={answer} id={answer} exam={exam}/>
                     </div>
             })}
             </div>
             <div className="correct-answers">
             {
                 correctAnswers.map(answer => {
-                    return <ReviewQuestion key={answer} id={answer} exam={exam}/>
+                    return <ReviewQuestion wasAnswer={true} key={answer} id={answer} exam={exam}/>
             })}
             </div>
 
