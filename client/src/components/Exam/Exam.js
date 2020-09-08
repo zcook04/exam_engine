@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 
 import SearchExam from "./SearchExams"
 import CurrentExam from "./CurrentExam"
@@ -15,16 +15,12 @@ const Exam = () => {
     const authContext = useContext(AuthContext)
     const examContext = useContext(ExamContext)
 
-    const { inReview, startReview, questions, prevQuestion, nextQuestion, exam, index, currentQuestion } = examContext
+    const { inReview, questions } = examContext
 
     useEffect(() => {
         authContext.loadUser()
         // eslint-disable-next-line
     }, [])
-
-
-    // IF NO QUESTIONS HIDE THE BOTTOM EXAM-NAVIGATION
-    const bottomBarClass = questions.length > 0 ? 'exam-bottom-bar' : 'exam-bottom-bar hidden'
 
   return (
     <div className="exam-container">

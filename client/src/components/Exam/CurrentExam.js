@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, { useContext } from 'react';
 
 import ExamPrompts from "./ExamPrompts"
 
@@ -11,7 +11,7 @@ import "./Exam.css"
 const CurrentExam = () => {
     const examContext = useContext(ExamContext)
 
-    const { inReview, startReview, questions, prevQuestion, nextQuestion, index, currentQuestion, answers } = examContext
+    const { inReview, startReview, questions, prevQuestion, nextQuestion, index, currentQuestion } = examContext
 
 
 

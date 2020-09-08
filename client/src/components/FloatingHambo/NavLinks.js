@@ -38,7 +38,7 @@ const NavLinks = (props) => {
                     <NavLink to="/flashcards" className="navlinks-a" onClick={navlinkHandler}><li className="navlinks-li">Flip Flashcards</li></NavLink>
                     <NavLink to="/contribute" className="navlinks-a" activeClassName="active" onClick={navlinkHandler}><li className="navlinks-li">Contribute</li></NavLink>
                     <NavLink to="/forum" className="navlinks-a" activeClassName="active" onClick={navlinkHandler}><li className="navlinks-li">Forum</li></NavLink>
-                    {authContext.isAuthenticated ?
+                    {isAuthenticated ?
                     <NavLink to="/logout" className="navlinks-a" activeClassName="active" onClick={logoutHandler}><li className="navlinks-li" >Logout</li></NavLink> :
                     <NavLink to="/login" className="navlinks-a" activeClassName="active" onClick={navlinkHandler}><li className="navlinks-li" >Login / Register</li></NavLink>}
                 </ul>
