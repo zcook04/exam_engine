@@ -4,10 +4,6 @@ import ExamPrompts from "./ExamPrompts"
 
 import ExamContext from "../../context/exam/examContext"
 
-import "./Exam.css"
-
-
-
 const CurrentExam = () => {
     const examContext = useContext(ExamContext)
 
@@ -17,7 +13,7 @@ const CurrentExam = () => {
 
 
     // IF NO QUESTIONS HIDE THE BOTTOM EXAM-NAVIGATION
-    const bottomBarClass = questions.length > 0 ? 'exam-bottom-bar' : 'exam-bottom-bar hidden'
+    // const bottomBarClass = questions.length > 0 ? 'exam-bottom-bar' : 'exam-bottom-bar hidden'
 
   return (
             <form id="exam" className={(!questions || inReview) ? 'hidden' : ''}>
@@ -30,7 +26,7 @@ const CurrentExam = () => {
                                     text={prompt.prompt.text}
                                     />
                         })}
-                <div id="exam-bottom-bar" className={bottomBarClass}>
+                <div id="exam-bottom-bar" className={`exam-bottom-bar`}>
                     <span className="exam-nav" onClick={prevQuestion}>Previous Question</span>
                 { //SHOW SUBMIT BUTTON AT END OF TEST
                     index === questions.length-1 ?

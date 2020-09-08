@@ -15,7 +15,7 @@ const Exam = () => {
     const authContext = useContext(AuthContext)
     const examContext = useContext(ExamContext)
 
-    const { inReview, questions } = examContext
+    const { inReview, currentQuestion } = examContext
 
     useEffect(() => {
         authContext.loadUser()
@@ -25,7 +25,7 @@ const Exam = () => {
   return (
     <div className="exam-container">
         <SearchExam/>
-        {(questions && !inReview) && <CurrentExam />}
+        {(currentQuestion !== null && !inReview) && <CurrentExam />}
         <ReviewExam  />
        
     </div>
