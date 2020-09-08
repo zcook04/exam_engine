@@ -21,7 +21,7 @@ const CurrentExam = () => {
                     {currentQuestion && currentQuestion.prompts.map((prompt) => {
                         return <ExamPrompts  
                                     key={prompt._id} 
-                                    id={currentQuestion ? currentQuestion._id : ''}
+                                    id={currentQuestion._id}
                                     isAnswer={prompt.prompt.isAnswer}
                                     text={prompt.prompt.text}
                                     />
@@ -29,7 +29,7 @@ const CurrentExam = () => {
                 <div id="exam-bottom-bar" className={`exam-bottom-bar`}>
                     <span className="exam-nav" onClick={prevQuestion}>Previous Question</span>
                 { //SHOW SUBMIT BUTTON AT END OF TEST
-                    index === questions.length-1 ?
+                    (questions && (index === questions.length-1)) ?
                     <span className="exam-nav" onClick={startReview}>Submit and Review</span> :
                     <span className="exam-nav" onClick={nextQuestion}>Next Question</span>
                 }

@@ -1,6 +1,5 @@
 .exam-review-container {
-    padding: 10px;
-    margin: 10px;
+    margin-top: 2rem;
 }
 
 .exam-review-container.hidden {

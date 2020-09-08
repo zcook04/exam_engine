@@ -27,7 +27,7 @@ const ExamPrompts = (props) => {
 
     return (
       <div className="prompt-container">
-        <input value={id} name={currentQuestion} onChange={changeHandler} type="radio" />
+        <input value={currentQuestion._id} name={currentQuestion} onChange={changeHandler} type="radio" />
         <p>{text}</p>
       </div>
     );

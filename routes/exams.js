@@ -2,6 +2,22 @@ const express = require('express')
 const router = express.Router()
 const Question = require('../models/Exam')
 
+router.get('/', async (req, res) => {
+    let allExams = []
+    
+    try{
+        exams = await Question.find()
+        exams.forEach(exam => {
+            if(!allExams.includes(exam.exam)) {
+                allExams.push(exam.exam)
+            }
+        })
+    } catch (err) {
+        console.log(err)
+    }
+    res.json(allExams)
+})
+
 router.get('/:exam', async (req, res) => {
     //PULL EXAM, CATEGORIES AND QUANTITY FROM URL
     const exam = req.params.exam.toUpperCase()
@@ -70,7 +86,6 @@ router.get('/:exam', async (req, res) => {
         let question
         try {
             await Question.find({_id: id}, (err, result) =>{
-                
                 if(err){
                     console.log(err)
                     return
@@ -80,7 +95,11 @@ router.get('/:exam', async (req, res) => {
             })} catch(err) {
                 console.log('TryCaught:' +err)
             }
-            res.send(question[0])
+            if(typeof(question[0]) !== undefined && question[0]){
+                res.send(question[0])
+            } else {
+                res.send({})
+            }
         })
 
 module.exports = router

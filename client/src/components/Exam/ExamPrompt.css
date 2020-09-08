@@ -9,6 +9,8 @@
     margin-bottom: .2rem;
     margin: 10px;
     background: #000;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .prompt-container p {

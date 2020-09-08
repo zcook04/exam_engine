@@ -6,7 +6,9 @@ import {
     INCREMENT_INDEX,
     DECREMENT_INDEX,
     INITIALIZE_CURRENT_QUESTION,
-    UPDATE_ANSWER
+    UPDATE_ANSWER,
+    GET_EXAMLIST,
+    SET_EXAM
 } from '../types'
 
 export default (state, action) => {
@@ -47,6 +49,16 @@ export default (state, action) => {
             return {
                 ...state,
                 answers: {...state.answers, ...action.payload}
+            }
+        case GET_EXAMLIST:
+            return {
+                ...state,
+                examList: action.payload
+            }
+        case SET_EXAM:
+            return {
+                ...state,
+                exam: action.payload
             }
         case RESET_EXAM:
             return {
