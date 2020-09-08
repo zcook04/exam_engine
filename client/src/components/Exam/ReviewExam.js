@@ -1,10 +1,11 @@
-import React, { memo } from 'react';
+import React, { useContext } from 'react';
 import ReviewQuestion from './ReviewQuestion'
-
+import ExamContext from "../../context/exam/examContext"
 import './ReviewExam.css'
 
-const ReviewExam = memo((props) => {
-    const { answers, exam, inReview } = props.answers ? props : {answers: {"noanswers": false}}
+const ReviewExam = () => {
+    const examContext = useContext(ExamContext)
+    const { answers, exam, inReview } = examContext
 
     //SORT CORRECT/WRONG ANSWERS INTO SEPERATE ARRAYS AND COUNTS
     const sortAnswers = () => {
@@ -54,6 +55,6 @@ const ReviewExam = memo((props) => {
 
         </div>
     );
-});
+};
 
 export default ReviewExam;

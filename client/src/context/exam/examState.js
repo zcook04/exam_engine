@@ -4,13 +4,24 @@ import examReducer from './examReducer'
 import axios from 'axios'
 import {
     SET_INREVIEW,
-    REMOVE_INREVIEW
+    REMOVE_INREVIEW,
+    LOAD_QUESTIONS,
+    RESET_EXAM,
+    INCREMENT_INDEX,
+    DECREMENT_INDEX,
+    INITIALIZE_CURRENT_QUESTION,
+    UPDATE_ANSWER
 } from '../types'
 
 const ExamState = props => {
     const initialState = {
         inReview: false,
-        categories: null
+        categories: null,
+        index: 0,
+        exam: 'ccna',
+        questions: [],
+        currentQuestion: null,
+        answers: null
     }
 
     const [state, dispatch] = useReducer(examReducer, initialState)
@@ -36,14 +47,78 @@ const ExamState = props => {
         return arr;
     }
 
+    const getQuestions = async () => {
+        resetExam()
+        if(state.categories !== null){
+            try {
+                let response = await axios.get(`http://localhost:5000/api/exams/${state.exam}/${state.categories}`)
+                const data = await response.data
+                shuffle(data)
+                dispatch({type: LOAD_QUESTIONS, payload: data})
+            } catch(err) {
+                console.log(err)
+            }
+        } else {
+            try { 
+                let response = await axios.get(`http://localhost:5000/api/exams/${state.exam}`)
+                const data = await response.data
+                shuffle(data)
+                await dispatch({type: LOAD_QUESTIONS, payload: data})
+                dispatch({ type: INITIALIZE_CURRENT_QUESTION})
+            } catch(err) {
+                console.log(err)
+            }
+        }
+    }
+
+    const updateAnswers = (newAnswer) => {
+        dispatch({ type: UPDATE_ANSWER, payload: newAnswer})
+    }
+
+    const resetExam = () => {
+        dispatch({type: RESET_EXAM})
+    }
+
+    // INCREASES INDEX AND MOVES TO THE NEXT INDEXED QUESTION
+    const nextQuestion = async () => {
+        if((state.questions.length -1) !== (state.index)) {
+            try {
+                dispatch({ type: INCREMENT_INDEX })
+            } catch (err){
+                console.log(err)
+            }
+        }
+    }
+
+    // DECREASES INDEX AND MOVES TO PREVIOUS QUESTION
+    const prevQuestion = () => {
+        if(state.index > 0) {
+            try{
+                dispatch({ type: DECREMENT_INDEX })
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    }
+
     return (
         <ExamContext.Provider
             value={{
                 inReview: state.inReview,
                 categories: state.categories,
+                exam: state.exam,
+                questions: state.questions,
+                index: state.index,
+                currentQuestion: state.currentQuestion,
+                answers: state.answers,
                 startReview,
                 endReview,
-                shuffle
+                shuffle,
+                getQuestions,
+                resetExam,
+                nextQuestion,
+                prevQuestion,
+                updateAnswers
             }}
         >
             {props.children}

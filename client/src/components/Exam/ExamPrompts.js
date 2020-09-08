@@ -1,22 +1,27 @@
-import React from "react"
+import React, { useContext } from "react"
+
+import ExamContext from "../../context/exam/examContext"
 
 import "./ExamPrompt.css"
 
 
 
 const ExamPrompts = (props) => {
-  const {text, isAnswer, answers, setAnswers, id, currentQuestion} = props
+  const examContext = useContext(ExamContext)
+  const { updateAnswers, answers, currentQuestion } = examContext
+
+  const {text, isAnswer, id } = props
 
   const changeHandler = (e) => {
     if(e.target.value && isAnswer) {
       const currentAnswers = { ...answers }
       currentAnswers[e.target.value] = true
-    setAnswers(currentAnswers)    
+    updateAnswers({...currentAnswers})
     }
     if(e.target.value && !isAnswer) {
       const currentAnswers = { ...answers }
       currentAnswers[e.target.value] = false
-    setAnswers(currentAnswers) 
+    updateAnswers({...currentAnswers}) 
     }
   }
 
