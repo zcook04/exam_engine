@@ -4,27 +4,32 @@ const Question = require('../models/Exam')
 
 router.post('/question', async (req, res) => {
 
-    const { exam, category, question, questionType,
-    isPublished, prompts, explainations} = req.body
-    
-        
+    const { exam, category, question, questionType, prompts, explainations, contributedBy} = req.body
 
     try {
-        let q = await Question.findOne({ question })
-        if(q) {
+        let questionExists = await Question.findOne({ question })
+        if(questionExists) {
+            console.log('Question Exists')
             return res.status(400).json({ msg: 'Questions already exists'})
+        } else{
+            contributeQuestion = new Question({
+                exam, category, question, questionType,
+                prompts, explainations, contributedBy
+            })
+            const savedQuestion = await contributeQuestion.save((err, response) => {
+                if(err) {
+                    console.log(err)
+                    return res.status(500).json({msg: err})
+                } else {
+                    console.log(savedQuestion)
+                    return res.status(200).json({ msg: 'Saved Successfully'})
+                }
+            
+            })    
         }
-
-        contributeQuestion = new Question({
-            exam, category, question, questionType,
-            isPublished, prompts, explainations
-        })
-
-        await contributeQuestion.save()
-        res.send('Question Saved')
-
     } catch (err) {
-        res.sendStatus(500).json({msg: err})
+        console.log(err)
+        return res.status(500).json({ msg: 'Server Error'})
     }
 })
 

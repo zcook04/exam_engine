@@ -20,7 +20,7 @@ connectDB()
 
 // INIT MIDDLEWARE
 app.use(cors())
-app.use(express.json({ extended: false }))
+app.use(express.json({ extended: true }))
 
 app.use(express.static(__dirname + '/public'))
 

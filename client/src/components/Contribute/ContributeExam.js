@@ -1,8 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios'
+
 
 import './ContributeExam.css'
 
+import AuthContext from '../../context/auth/authContext'
+import AlertContext from '../../context/alert/alertContext'
+
 const ContributeExam = () => {
+    const authContext = useContext(AuthContext)
+    const alertContext = useContext(AlertContext)
+
+    const { user } = authContext
+    const { setAlert } = alertContext
+
     const [exam, setExam] = useState('')
     const [category, setCategory] = useState('')
     const [question, setQuestion] = useState('')
@@ -17,17 +28,42 @@ const ContributeExam = () => {
 
     useEffect(() => {
         setPrompts([
-            prompt1,
-            prompt2,
-            prompt3,
-            prompt4
+            {prompt: {text: prompt1, isAnswer: (answer === prompt1)}},
+            {prompt: {text: prompt2, isAnswer: (answer === prompt2)}},
+            {prompt: {text: prompt3, isAnswer: (answer === prompt3)}},
+            {prompt: {text: prompt4, isAnswer: (answer === prompt4)}}
         ])
-    },[prompt1, prompt2, prompt3, prompt4])
+    },[prompt1, prompt2, prompt3, prompt4, answer])
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {        
         e.preventDefault()
-        
-
+        try{
+            await axios.post('http://localhost:5000/api/contribute/question', {
+                exam,
+                category,
+                question,
+                questionType,
+                prompts,
+                explainations: [{
+                    contributedBy: user._id,
+                    text: explaination,
+                }],
+                contributedBy: user._id,
+            })
+        } catch(err) {
+            setAlert('error', 'An error occurred.  Question could not be submitted.')
+            window.scrollTo(0,0)
+            return
+        }
+        window.scrollTo(0,0)
+        setQuestion('')
+        setPrompt1('')
+        setPrompt2('')
+        setPrompt3('')
+        setPrompt4('')
+        setExplaination('')
+        setAnswer('')
+        setAlert('success', 'Question was submitted successfully!')
     }
 
     const changeHandler = (e) => {
@@ -65,7 +101,6 @@ const ContributeExam = () => {
             default:
                 break
         }
-        console.log(e.target.value)
     }
 
     return (
@@ -97,11 +132,13 @@ const ContributeExam = () => {
                         <input type="text" value={prompt4} name="prompt4" onChange={changeHandler} placeholder="Prompt4"/>
                         </label>
                     <label htmlFor="answer">What is the correct answer:
-                        <select name="answer" id="answer" value={answer} onChange={changeHandler}>
-                            {prompts && prompts.map(currentPrompt => {
-                                return <option value={currentPrompt}>{currentPrompt}</option>
-                            })}
-                            </select>
+                        <select name="answer" id="answer" onChange={changeHandler}>
+                            <option value="defaultValue">Please select the correct answer</option>
+                            {prompt1 && <option value={prompt1}>{prompt1}</option>}
+                            {prompt2 && <option value={prompt2}>{prompt2}</option>}
+                            {prompt3 && <option value={prompt3}>{prompt3}</option>}
+                            {prompt4 && <option value={prompt4}>{prompt4}</option>}
+                        </select>
                     </label>
                     <label htmlFor="explaination" >Provide an explaination to help users understand the topic better:
                         <input type="text" value={explaination} name="explaination" onChange={changeHandler} placeholder="Explaination"/>

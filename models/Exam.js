@@ -18,9 +18,7 @@ const questionSchema = new mongoose.Schema ({
         }],
     rating: [],
     explainations: [{ 
-        id: String,
-        questionId: String,
-        userId: String,
+        contributedBy: String,
         text: String,
         ratings:  [Number],
         comments: [String]
