@@ -1,7 +1,9 @@
 import React, { useContext, useEffect } from 'react';
+import ContributeExam from './ContributeExam'
+
 import AuthContext from '../../context/auth/authContext';
 
-const Contribute = (props) => {
+const Contribute = () => {
     const authContext = useContext(AuthContext)
 
     useEffect(() => {
@@ -10,7 +12,9 @@ const Contribute = (props) => {
     }, [])
 
     return (
-        <h1>CONTRIBUTE</h1>
+        <div className="contibute-page">
+            <ContributeExam />
+        </div>
     )
 };
 

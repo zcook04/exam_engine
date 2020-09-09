@@ -1,0 +1,28 @@
+.contribute-exam-container {
+    margin: auto;
+    max-width: 600px;
+    display: flex;
+}
+
+.contribute-exam-form {
+    width: 100%;
+}
+
+.contribute-exam-form input {
+    width: 100%;
+    display: block;
+    margin-bottom: 2rem;
+    margin-top: .2rem;
+}
+
+.contribute-exam-form select {
+    min-width: 50%;
+    display: block;
+    margin-bottom: 2rem;
+    margin-top: .2rem;
+}
+
+.contribute-exam-form-container button {
+    width: 100%;
+}
+

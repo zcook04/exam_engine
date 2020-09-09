@@ -66,7 +66,6 @@ export default (state, action) => {
                 inReview: false,
                 categories: null,
                 index: 0,
-                exam: 'ccna',
                 questions: [],
                 currentQuestion: null,
                 answers: null
