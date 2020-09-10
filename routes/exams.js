@@ -3,19 +3,20 @@ const router = express.Router()
 const Question = require('../models/Exam')
 
 router.get('/', async (req, res) => {
-    let allExams = []
+    let allExamTitles = []
     
     try{
         exams = await Question.find()
+        //GETS EXAM TITLES
         exams.forEach(exam => {
-            if(!allExams.includes(exam.exam)) {
-                allExams.push(exam.exam)
+            if(!allExamTitles.includes(exam.exam)) {
+                allExamTitles.push(exam.exam)
             }
         })
     } catch (err) {
         console.log(err)
     }
-    res.json(allExams)
+    res.json(allExamTitles)
 })
 
 router.get('/:exam', async (req, res) => {

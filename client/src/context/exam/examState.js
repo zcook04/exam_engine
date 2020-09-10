@@ -29,10 +29,12 @@ const ExamState = props => {
 
     const [state, dispatch] = useReducer(examReducer, initialState)
 
+    // SETS INREVIEW STATE TO TRUE
     const startReview = () => {
         dispatch({ type: SET_INREVIEW })
     }
 
+    // SETS INREVIEW STATE TO FALSE
     const endReview = () => {
         dispatch({ type: REMOVE_INREVIEW })
     }
@@ -50,11 +52,13 @@ const ExamState = props => {
         return arr;
     }
 
+    // EXAM?CATEGORY=COUNT&CATEGORY=COUNT
+    // RETURNS EXAM QUESTIONS WITH SPECIFIED COUNTS FROM EACH CATEGORY.
     const getQuestions = async () => {
         resetExam()
         if(state.categories !== null){
             try {
-                let response = await axios.get(`http://localhost:5000/api/exams/${state.exam}/${state.categories}`)
+                let response = await axios.get(`http://localhost:5000/api/exams/${state.exam}?${state.categories}`)
                 const data = await response.data
                 shuffle(data)
                 dispatch({type: LOAD_QUESTIONS, payload: data})
@@ -74,10 +78,12 @@ const ExamState = props => {
         }
     }
 
+    //ADDS OR MODIFIES CURRENT EXAMS ANSWERS BASED ON QUESTION ID BEING TRUE OR FALSE
     const updateAnswers = (newAnswer) => {
         dispatch({ type: UPDATE_ANSWER, payload: newAnswer})
     }
 
+    // RESETS EXAM PARAMETERS
     const resetExam = () => {
         dispatch({type: RESET_EXAM})
     }
@@ -104,21 +110,42 @@ const ExamState = props => {
         }
     }
 
+    // GETS A LIST OF EXAM TITLES
     const getExamList = async () => {
         try {
             const response = await axios.get(`http://localhost:5000/api/exams/`)
             const data = await response.data
+            
             dispatch({ type: GET_EXAMLIST, payload: data })
         } catch (err) {
             console.log(err)
         }
     }
 
+    // GIVEN A TITLE, GETS A LIST OF ITS CORRESPONDING CATEGORIES AND EACH
+    // CATEGORIES QUESTION COUNT.
+    const getExamCategories = async (title) => {
+        const response = await axios.get(`http://localhost:5000/api/exams/${title}`)
+        const questions = response.data
+        const categoryPlaceholder = []
+        const categories = []
+        questions.forEach(question => {
+            if(categoryPlaceholder.indexOf(question.category) === -1 ){
+                let count = 0
+                questions.forEach(innerQuestion => {
+                    if(innerQuestion.category === question.category)
+                    count++
+                })
+                categoryPlaceholder.push(question.category)
+                categories.push({category: question.category, count })
+            }
+        })
+    }
+
+    // UPDATES THE EXAM STATE WITH NEW EXAM VALUE
     const setExam = (examValue) => {
         dispatch({ type: SET_EXAM, payload: examValue })
     }
-
-
 
     return (
         <ExamContext.Provider
@@ -136,6 +163,7 @@ const ExamState = props => {
                 endReview,
                 shuffle,
                 getQuestions,
+                getExamCategories,
                 resetExam,
                 nextQuestion,
                 prevQuestion,

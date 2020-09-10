@@ -1,15 +1,19 @@
-import React, {useContext, useEffect } from 'react';
+import React, {useContext, useEffect, useState } from 'react';
 
 import ExamState from '../../context/exam/examContext'
 
 const SearchExams = props => {
     const examState = useContext(ExamState)
-    const { getQuestions, examList, getExamList, setExam } = examState
+    const { getQuestions, examList, getExamList, setExam, exam, getExamCategories } = examState
 
     useEffect(() => {
         getExamList()
         //eslint-disable-next-line
     }, [])
+
+    useEffect(() => {
+        getExamCategories(exam)
+    }, [exam])
 
     const examHandler = (e) => {
         setExam(e.target.value)
