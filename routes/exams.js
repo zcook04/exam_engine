@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {getExamTitles, getExamQuestion, getExamQuestions } = require('../controllers/exams')
+const {getExamTitles, getExamQuestion, getExamQuestions, getExamCategories } = require('../controllers/exams')
 
 // ROUTES FOR 
 // API/EXAMS
@@ -14,7 +14,7 @@ router.get('/:exam', async (req, res) => {
 })
 
 router.get('/:exam/categories', async (req, res) => {
-    return {}
+    getExamCategories(req, res)
     // Will return array of objects containing specified exams
     // categories and their count
 })

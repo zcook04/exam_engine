@@ -15,13 +15,13 @@ const ReviewQuestion = (props) => {
 
     
     useEffect(() => {
-        const getQuestion = async () => {
-            const response = await axios.get(`http://localhost:5000/api/exams/${exam}/${id}`)
+        const getReviewQuestion = async () => {
+            const response = await axios.get(`http://localhost:5000/api/exams/${exam}/id/${id}`)
             const data = await [response.data]
             setQuestion(data[0])
             setPrompts([...data[0].prompts])
         }
-        getQuestion()
+        getReviewQuestion()
     },[exam, id])
 
     const reviewTitleClasses = wasAnswer ? 'review-question-question is-answer' : 'review-question-question not-answser'

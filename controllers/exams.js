@@ -18,7 +18,7 @@ getExamTitles = async (req, res, next) => {
     } catch (err) {
         console.log(err)
     }
-    res.json(allExamTitles)
+    return res.json(allExamTitles)
 }
 
 // PUBLIC ROUTE
@@ -39,9 +39,9 @@ getExamQuestion = async (req, res, next) => {
             console.log('TryCaught:' +err)
         }
         if(typeof(question[0]) !== undefined && question[0]){
-            res.send(question[0])
+            return res.send(question[0])
         } else {
-            res.send({})
+            return res.send({})
         }
 }
 
@@ -90,10 +90,38 @@ getExamQuestions = async (req, res, next) => {
         if(categories.length >= 1) {
             const filteredQuestions = await filterQuestions(allExamQuestions, categories)
             const finalQuestions = shuffleArray(filteredQuestions.flat())
-            res.send(finalQuestions)
+            return res.send(finalQuestions)
         } else {
-            res.send(allExamQuestions)
+            return res.send(allExamQuestions)
         }
 }
 
-module.exports = {getExamTitles, getExamQuestion, getExamQuestions}
+getExamCategories = async (req, res) => {
+    const { exam } = req.params
+    try {
+        let allQuestions = await Question.find({"exam": exam.toUpperCase()}) 
+        const categoryPlaceholder = []
+        const categories = []
+
+        allQuestions.forEach(question => {
+            if(categoryPlaceholder.indexOf(question.category) === -1 ){
+                let count = 0
+                allQuestions.forEach(innerQuestion => {
+                    if(innerQuestion.category === question.category)
+                    count++
+                })
+                categoryPlaceholder.push(question.category)
+                categories.push({category: question.category, count })
+            }
+        })
+        if(categories.length > 0)
+            return res.status(200).json(categories)
+    }catch(err) {
+        console.log('TryCaught:' +err)
+        return res.status(500).json({success: false, msg: `An interal error occured: ${err}`})
+    }
+    return res.status(404).json({success: false, msg: `No Categories Exist for exam: ${exam.toUpperCase()}`})
+}
+
+
+module.exports = {getExamTitles, getExamQuestion, getExamQuestions, getExamCategories}

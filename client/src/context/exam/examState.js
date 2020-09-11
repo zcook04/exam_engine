@@ -22,7 +22,7 @@ const ExamState = props => {
         inReview: false,
         categories: null,
         index: 0,
-        exam: null,
+        exam: 'ccna',
         questions: [],
         currentQuestion: null,
         answers: null,
@@ -58,27 +58,16 @@ const ExamState = props => {
     // RETURNS EXAM QUESTIONS WITH SPECIFIED COUNTS FROM EACH CATEGORY.
     const getQuestions = async () => {
         resetExam()
-        if(state.categories !== null){
-            try {
-                let response = await axios.get(`http://localhost:5000/api/exams/${state.exam}?${state.categories}`)
-                const data = await response.data
-                shuffle(data)
-                dispatch({type: LOAD_QUESTIONS, payload: data})
-            } catch(err) {
-                console.log(err)
-            }
-        } else {
             try { 
                 let response = await axios.get(`http://localhost:5000/api/exams/${state.exam}`)
                 const data = await response.data
                 shuffle(data)
-                await dispatch({type: LOAD_QUESTIONS, payload: data})
+                dispatch({type: LOAD_QUESTIONS, payload: data})
                 dispatch({ type: INITIALIZE_CURRENT_QUESTION})
             } catch(err) {
                 console.log(err)
             }
         }
-    }
 
     //ADDS OR MODIFIES CURRENT EXAMS ANSWERS BASED ON QUESTION ID BEING TRUE OR FALSE
     const updateAnswers = (newAnswer) => {
@@ -117,8 +106,7 @@ const ExamState = props => {
         dispatch({ type: CLEAR_EXAM_CATEGORIES })
         try {
             const response = await axios.get(`http://localhost:5000/api/exams/`)
-            const data = await response.data
-            dispatch({ type: GET_EXAMLIST, payload: data })
+            dispatch({ type: GET_EXAMLIST, payload: response.data })
         } catch (err) {
             console.log(err)
         }
@@ -126,23 +114,9 @@ const ExamState = props => {
 
     // GIVEN A TITLE, GETS A LIST OF ITS CORRESPONDING CATEGORIES AND EACH
     // CATEGORIES QUESTION COUNT.
-    const getExamCategories = async (title) => {
-        const response = await axios.get(`http://localhost:5000/api/exams/${title}`)
-        const questions = response.data
-        const categoryPlaceholder = []
-        const categories = []
-        questions.forEach(question => {
-            if(categoryPlaceholder.indexOf(question.category) === -1 ){
-                let count = 0
-                questions.forEach(innerQuestion => {
-                    if(innerQuestion.category === question.category)
-                    count++
-                })
-                categoryPlaceholder.push(question.category)
-                categories.push({category: question.category, count })
-            }
-        })
-        dispatch({ type: ADD_EXAM_CATEGORIES, payload: categories })
+    const getExamCategories = async () => {
+        const response = await axios.get(`http://localhost:5000/api/exams/${state.exam}/categories`)
+        dispatch({ type: ADD_EXAM_CATEGORIES, payload: response.data })
     }
 
     // UPDATES THE EXAM STATE WITH NEW EXAM VALUE

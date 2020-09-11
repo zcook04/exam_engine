@@ -6,7 +6,7 @@ const cors = require('cors')
 app = express()
 
 // FOR DEV ONLY.  NEEDS UPDATED
-const whitelist = ['http://localhost', undefined]
+const whitelist = ['http://localhost:5000', 'http://localhost:3000', undefined]
 const corsOptions = {
     origin: function (origin, callback) {
         if(whitelist.indexOf(origin) !== -1) {
