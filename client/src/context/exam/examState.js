@@ -60,11 +60,20 @@ const ExamState = props => {
     const getQuestions = async () => {
         resetExam()
             try { 
-                let response = await axios.get(`http://localhost:5000/api/exams/${state.exam}`)
-                const data = await response.data
-                shuffle(data)
-                dispatch({type: LOAD_QUESTIONS, payload: data})
-                dispatch({ type: INITIALIZE_CURRENT_QUESTION})
+                if(state.categories !== null) {
+                    const categoryString = setCategoryString()
+                    let response = await axios.get(`http://localhost:5000/api/exams/${state.exam}${categoryString}`)
+                    const data = await response.data
+                    shuffle(data)
+                    dispatch({type: LOAD_QUESTIONS, payload: data})
+                    dispatch({ type: INITIALIZE_CURRENT_QUESTION})
+                } else {
+                    let response = await axios.get(`http://localhost:5000/api/exams/${state.exam}`)
+                    const data = await response.data
+                    shuffle(data)
+                    dispatch({type: LOAD_QUESTIONS, payload: data})
+                    dispatch({ type: INITIALIZE_CURRENT_QUESTION})
+                }
             } catch(err) {
                 console.log(err)
             }
@@ -134,13 +143,16 @@ const ExamState = props => {
     const setCategoryString = () => {
         const categoryValues = []
         state.categories.forEach(category => {
-            if(category.count <= 0 || category.count >= category.max ){
+            if(category.count <= 0){
                 return
-            } else {
+            } else if (categoryValues.length <= 0){
+                categoryValues.push(`?${category.name}=${category.count}`)
+            } 
+            else {
                 categoryValues.push(`${category.name}=${category.count}`)
             }
-            console.log(categoryValues)
         })
+        return categoryValues.join('&')
     }
 
     return (

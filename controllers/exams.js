@@ -68,7 +68,7 @@ getExamQuestions = async (req, res, next) => {
                 console.log('TryCaught:' +err)
             }
 
-        // CHECK TO SEE IF CATEGORY SEARCH PARAMETERS WERE ADDED
+        // CHECK TO SEE IF CATEGORY QUERY PARAMETERS WERE ADDED
         if(categories.length >= 1) {
             return res.status(200).json(categoryQuestions(allExamQuestions, req.query))
         } else {
