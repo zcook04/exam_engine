@@ -111,7 +111,7 @@ getExamCategories = async (req, res) => {
                     count++
                 })
                 categoryPlaceholder.push(question.category)
-                categories.push({category: question.category, count })
+                categories.push({name: question.category, count })
             }
         })
         if(categories.length > 0)

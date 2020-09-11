@@ -1,7 +1,5 @@
 import React, { useContext, useState } from "react"
 
-import CategoryInput from './CategoryInput'
-
 import ExamContext from "../../context/exam/examContext"
 
 import "./ExamCategories.css"
@@ -10,24 +8,26 @@ import "./ExamCategories.css"
 
 const ExamCategories = () => {
   const examContext = useContext(ExamContext)
-  const { categories } = examContext
-  const [selectedCategories, setSelectedCategories] = useState(categories)
+  const { categories, updateCategories } = examContext
 
+  const changeHandler = async (e) => {
+    const newCategories = categories
+    for (let i =0; i < newCategories.length; i++)
+      if(newCategories[i].name === e.target.name) {
+        newCategories[i].count = e.target.value
+      }
+      await updateCategories(newCategories)
+    }
 
-  const changeHandler = (e) => {
-    let currentValue = {}
-    currentValue[e.target.name] = e.target.value
-    setSelectedCategories({...selectedCategories, ...currentValue})
-  }
-
-
-  console.log(selectedCategories)
     return (
-            <div className="category-slider-container">
-                {categories.map( mapCategory => {
-                 const { category, count } = mapCategory
-                    return  <CategoryInput name={category} key={category} maxValue={count} changeHandler={changeHandler} />
-                        
+            <div className="category-container">
+                {categories.map((category) =>{
+                    return <h3 key={category.name}>
+                      <input type="number" min="0" defaultValue={category.count} name={category.name} onChange={changeHandler}/> 
+                      {category.name}
+                      </h3>
+                    
+
                 })}
             </div>
     );

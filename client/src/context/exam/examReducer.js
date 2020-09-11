@@ -9,8 +9,9 @@ import {
     UPDATE_ANSWER,
     GET_EXAMLIST,
     SET_EXAM,
-    ADD_EXAM_CATEGORIES,
-    CLEAR_EXAM_CATEGORIES
+    GET_ALL_EXAM_CATEGORIES,
+    CLEAR_EXAM_CATEGORIES,
+    UPDATE_EXAM_CATEGORIES
 } from '../types'
 
 export default (state, action) => {
@@ -62,7 +63,12 @@ export default (state, action) => {
                 ...state,
                 exam: action.payload
             }
-        case ADD_EXAM_CATEGORIES:
+        case GET_ALL_EXAM_CATEGORIES:
+            return {
+                ...state,
+                categories: action.payload
+            }
+        case UPDATE_EXAM_CATEGORIES:
             return {
                 ...state,
                 categories: action.payload

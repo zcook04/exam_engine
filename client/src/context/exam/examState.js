@@ -13,8 +13,9 @@ import {
     UPDATE_ANSWER,
     GET_EXAMLIST,
     SET_EXAM,
-    ADD_EXAM_CATEGORIES,
-    CLEAR_EXAM_CATEGORIES
+    GET_ALL_EXAM_CATEGORIES,
+    CLEAR_EXAM_CATEGORIES,
+    UPDATE_EXAM_CATEGORIES
 } from '../types'
 
 const ExamState = props => {
@@ -116,7 +117,12 @@ const ExamState = props => {
     // CATEGORIES QUESTION COUNT.
     const getExamCategories = async () => {
         const response = await axios.get(`http://localhost:5000/api/exams/${state.exam}/categories`)
-        dispatch({ type: ADD_EXAM_CATEGORIES, payload: response.data })
+        dispatch({ type: GET_ALL_EXAM_CATEGORIES, payload: response.data })
+    }
+
+    const updateCategories = (updatedCategories) => {
+        console.log(updatedCategories)
+        dispatch({ type: UPDATE_EXAM_CATEGORIES, payload: updatedCategories })
     }
 
     // UPDATES THE EXAM STATE WITH NEW EXAM VALUE
@@ -141,6 +147,7 @@ const ExamState = props => {
                 shuffle,
                 getQuestions,
                 getExamCategories,
+                updateCategories,
                 resetExam,
                 nextQuestion,
                 prevQuestion,
