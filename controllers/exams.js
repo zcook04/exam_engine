@@ -1,4 +1,5 @@
 const Question = require ('../models/Exam')
+const shuffleArray = require('../utils/utils')
 
 // PUBLIC ROUTE
 // GET /API/EXAMS/
@@ -21,7 +22,7 @@ getExamTitles = async (req, res, next) => {
 }
 
 // PUBLIC ROUTE
-// GET /API/EXAMS/:EXAM/:ID
+// GET /API/EXAMS/:EXAM/ID/:ID
 // RETURNS QUESTION OBJECT IF QUESTION EXISTS
 getExamQuestion = async (req, res, next) => {
     const id = req.params.id
@@ -44,6 +45,9 @@ getExamQuestion = async (req, res, next) => {
         }
 }
 
+// PUBLIC ROUTE
+// GET /API/EXAMS/:EXAM
+// RETURNS SHUFFLED ARRAY OF QUESTION OBJECTS FOR SPECIFIED EXAM
 getExamQuestions = async (req, res, next) => {
         //PULL EXAM, CATEGORIES AND QUANTITY FROM URL
         const exam = req.params.exam.toUpperCase()
@@ -62,18 +66,6 @@ getExamQuestions = async (req, res, next) => {
             })} catch(err) {
                 console.log('TryCaught:' +err)
             }
-    
-        const shuffleArray = (arr) => {
-            var currentIndex = arr.length, temporaryValue, randomIndex;
-            while (0 !== currentIndex) {
-              randomIndex = Math.floor(Math.random() * currentIndex);
-              currentIndex -= 1;
-              temporaryValue = arr[currentIndex];
-              arr[currentIndex] = arr[randomIndex];
-              arr[randomIndex] = temporaryValue;
-            }
-            return arr;
-        }
     
         //FILTER QUESTIONS BASED ON CATEGORY
         const filterQuestions = async (questions, categories) => {

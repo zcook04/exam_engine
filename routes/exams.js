@@ -13,7 +13,13 @@ router.get('/:exam', async (req, res) => {
     getExamQuestions(req, res)
 })
 
-router.get('/:exam/:id', async (req, res) => {
+router.get('/:exam/categories', async (req, res) => {
+    return {}
+    // Will return array of objects containing specified exams
+    // categories and their count
+})
+
+router.get('/:exam/id/:id', async (req, res) => {
     getExamQuestion(req, res)
 })
 
