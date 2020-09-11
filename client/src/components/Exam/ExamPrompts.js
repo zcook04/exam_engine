@@ -10,7 +10,7 @@ const ExamPrompts = (props) => {
   const examContext = useContext(ExamContext)
   const { updateAnswers, answers, currentQuestion } = examContext
 
-  const {text, isAnswer, id } = props
+  const {text, isAnswer } = props
 
   const changeHandler = (e) => {
     if(e.target.value && isAnswer) {

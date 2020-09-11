@@ -12,7 +12,9 @@ import {
     INITIALIZE_CURRENT_QUESTION,
     UPDATE_ANSWER,
     GET_EXAMLIST,
-    SET_EXAM
+    SET_EXAM,
+    ADD_EXAM_CATEGORIES,
+    CLEAR_EXAM_CATEGORIES
 } from '../types'
 
 const ExamState = props => {
@@ -20,7 +22,7 @@ const ExamState = props => {
         inReview: false,
         categories: null,
         index: 0,
-        exam: 'ccna',
+        exam: null,
         questions: [],
         currentQuestion: null,
         answers: null,
@@ -112,10 +114,10 @@ const ExamState = props => {
 
     // GETS A LIST OF EXAM TITLES
     const getExamList = async () => {
+        dispatch({ type: CLEAR_EXAM_CATEGORIES })
         try {
             const response = await axios.get(`http://localhost:5000/api/exams/`)
             const data = await response.data
-            
             dispatch({ type: GET_EXAMLIST, payload: data })
         } catch (err) {
             console.log(err)
@@ -140,6 +142,7 @@ const ExamState = props => {
                 categories.push({category: question.category, count })
             }
         })
+        dispatch({ type: ADD_EXAM_CATEGORIES, payload: categories })
     }
 
     // UPDATES THE EXAM STATE WITH NEW EXAM VALUE

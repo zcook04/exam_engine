@@ -8,7 +8,9 @@ import {
     INITIALIZE_CURRENT_QUESTION,
     UPDATE_ANSWER,
     GET_EXAMLIST,
-    SET_EXAM
+    SET_EXAM,
+    ADD_EXAM_CATEGORIES,
+    CLEAR_EXAM_CATEGORIES
 } from '../types'
 
 export default (state, action) => {
@@ -60,11 +62,21 @@ export default (state, action) => {
                 ...state,
                 exam: action.payload
             }
+        case ADD_EXAM_CATEGORIES:
+            return {
+                ...state,
+                categories: action.payload
+            }
+        case CLEAR_EXAM_CATEGORIES:
+            return {
+                ...state,
+                categories: null
+            }
         case RESET_EXAM:
             return {
                 ...state,
                 inReview: false,
-                categories: null,
+                categories: null, //NEEDS TO BE REMOVED ONCE CATEGORY SEARCH FUNCTION WORKS.
                 index: 0,
                 questions: [],
                 currentQuestion: null,

@@ -1,28 +1,37 @@
-import React, {useContext, useEffect, useState } from 'react';
+import React, {useContext, useEffect } from 'react';
+
+import ExamCategories from './ExamCategories'
 
 import ExamState from '../../context/exam/examContext'
 
 const SearchExams = props => {
     const examState = useContext(ExamState)
-    const { getQuestions, examList, getExamList, setExam, exam, getExamCategories } = examState
+    const { getQuestions, examList, getExamList, setExam, categories, getExamCategories, exam } = examState
 
     useEffect(() => {
         getExamList()
-        //eslint-disable-next-line
+        // eslint-disable-next-line
     }, [])
 
     useEffect(() => {
         getExamCategories(exam)
-    }, [exam])
+        // eslint-disable-next-line
+        }, [])
+
+    useEffect(() => {
+        getExamCategories(exam)
+        // eslint-disable-next-line
+        }, [exam])
+
 
     const examHandler = (e) => {
         setExam(e.target.value)
+        console.log(e)
     }
 
     return (
 
             <div className="exam-search-container">
-                <h2>Lets get started...</h2>
                 <label htmlFor="exam-name">Choose An Exam: </label>
                 <select onChange={examHandler} name="exam-name" id="exam-name">
                     <optgroup label="Exams">
@@ -30,7 +39,9 @@ const SearchExams = props => {
                             return <option key={examTitle} value={examTitle}>{examTitle}</option>
                         })}
                     </optgroup>
-                </select>
+                </select><br/>
+                        {(categories !== null &&categories.length > 0) && <ExamCategories />}
+                <br />
                 <button onClick={getQuestions}>Get Questions</button>
                 
             </div>
