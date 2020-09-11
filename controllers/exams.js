@@ -52,6 +52,7 @@ getExamQuestions = async (req, res, next) => {
         //PULL EXAM, CATEGORIES AND QUANTITY FROM URL
         const exam = req.params.exam.toUpperCase()
         const categories = Object.entries(req.query)
+
         //GET ALL QUESTIONS FOR THE SPECIFIED EXAM
         let allExamQuestions = []
         try {
@@ -66,33 +67,12 @@ getExamQuestions = async (req, res, next) => {
             })} catch(err) {
                 console.log('TryCaught:' +err)
             }
-    
-        //FILTER QUESTIONS BASED ON CATEGORY
-        const filterQuestions = async (questions, categories) => {
-            let filteredQuestions = categories.map(category => {
-                let q = questions.filter(question => question.category === category[0].toUpperCase())
-                if((q.length !==0) && (q.length<category[1])) {
-                    shuffleArray(q)
-                    return q
-                } else if (q.length > category[1]) {
-                    let shuffled = shuffleArray(q)
-                    while (shuffled.length > category[1]) {
-                        shuffled.pop()
-                    }
-                    return shuffled
-                } else {
-                    return null
-                }
-            })
-            return filteredQuestions.filter(question => !undefined || !null)
-        }
-    
+
+        // CHECK TO SEE IF CATEGORY SEARCH PARAMETERS WERE ADDED
         if(categories.length >= 1) {
-            const filteredQuestions = await filterQuestions(allExamQuestions, categories)
-            const finalQuestions = shuffleArray(filteredQuestions.flat())
-            return res.send(finalQuestions)
+            return res.status(200).json(categoryQuestions(allExamQuestions, req.query))
         } else {
-            return res.send(allExamQuestions)
+            return res.status(200).json(allExamQuestions)
         }
 }
 
@@ -111,7 +91,7 @@ getExamCategories = async (req, res) => {
                     count++
                 })
                 categoryPlaceholder.push(question.category)
-                categories.push({name: question.category, count })
+                categories.push({name: question.category, count, max: count })
             }
         })
         if(categories.length > 0)
@@ -122,6 +102,18 @@ getExamCategories = async (req, res) => {
     }
     return res.status(404).json({success: false, msg: `No Categories Exist for exam: ${exam.toUpperCase()}`})
 }
+
+// FILTER QUESTIONS BY CATEGORY AND COUNT SPECIFIED IN PARAM
+const categoryQuestions = (questions, categories) => {
+    const filteredQuestions = []
+    for (let key in categories) {
+        let currentQuestions = questions.filter(question => question.category === key.toUpperCase())
+        currentQuestions = currentQuestions.slice(0, categories[key])
+        filteredQuestions.push(currentQuestions)
+        }
+    return shuffleArray(filteredQuestions.flat())
+}
+
 
 
 module.exports = {getExamTitles, getExamQuestion, getExamQuestions, getExamCategories}

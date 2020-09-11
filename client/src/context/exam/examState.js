@@ -121,13 +121,26 @@ const ExamState = props => {
     }
 
     const updateCategories = (updatedCategories) => {
-        console.log(updatedCategories)
         dispatch({ type: UPDATE_EXAM_CATEGORIES, payload: updatedCategories })
+        setCategoryString()
     }
 
     // UPDATES THE EXAM STATE WITH NEW EXAM VALUE
     const setExam = (examValue) => {
         dispatch({ type: SET_EXAM, payload: examValue })
+    }
+
+    //SETS CATEGORY SEARCH STRING FOR BACKEND API
+    const setCategoryString = () => {
+        const categoryValues = []
+        state.categories.forEach(category => {
+            if(category.count <= 0 || category.count >= category.max ){
+                return
+            } else {
+                categoryValues.push(`${category.name}=${category.count}`)
+            }
+            console.log(categoryValues)
+        })
     }
 
     return (

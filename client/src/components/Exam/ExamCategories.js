@@ -23,11 +23,9 @@ const ExamCategories = () => {
             <div className="category-container">
                 {categories.map((category) =>{
                     return <h3 key={category.name}>
-                      <input type="number" min="0" defaultValue={category.count} name={category.name} onChange={changeHandler}/> 
+                      <input type="number" min="0" max={category.max} defaultValue={category.count} name={category.name} onChange={changeHandler}/> 
                       {category.name}
                       </h3>
-                    
-
                 })}
             </div>
     );
