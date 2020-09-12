@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt')
 const config = require('config')
 const auth = require('../middleware/auth')
 
+const jwtSecret = process.env.jwtSecret || config.get('jwtSecret')
+
 
 //ROUTE     GET api/auth
 //DESC      LOG IN USER AND GET JWT-TOKEN
@@ -52,7 +54,7 @@ router.post('/', [
             }
         }
 
-        jwt.sign(payload, config.get('jwtSecret'), {
+        jwt.sign(payload, jwtSecret, {
             expiresIn: 360000
         }, (err, token) => {
             if(err) throw err;

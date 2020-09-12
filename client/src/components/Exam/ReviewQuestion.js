@@ -22,7 +22,7 @@ const ReviewQuestion = (props) => {
     
     useEffect(() => {
         const getReviewQuestion = async () => {
-            const response = await axios.get(`http://localhost:5000/api/exams/${exam}/id/${id}`)
+            const response = await axios.get(`/api/exams/${exam}/id/${id}`)
             const data = await [response.data]
             setQuestion(data[0])
             setPrompts([...data[0].prompts])
