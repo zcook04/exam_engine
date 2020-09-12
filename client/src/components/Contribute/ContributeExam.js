@@ -90,7 +90,6 @@ const ContributeExam = () => {
     }
 
     const changeHandler = (e) => {
-        console.log(e.target.value)
         switch(e.target.name) {
             case ('exam'):
                 setExam(e.target.value)
