@@ -63,13 +63,13 @@ const ExamState = props => {
             try { 
                 if(state.categories !== null) {
                     const categoryString = setCategoryString()
-                    let response = await axios.get(`http://localhost:5000/api/exams/${state.exam}${categoryString}`)
+                    let response = await axios.get(`/api/exams/${state.exam}${categoryString}`)
                     const data = await response.data
                     shuffle(data)
                     dispatch({type: LOAD_QUESTIONS, payload: data})
                     dispatch({ type: INITIALIZE_CURRENT_QUESTION})
                 } else {
-                    let response = await axios.get(`http://localhost:5000/api/exams/${state.exam}`)
+                    let response = await axios.get(`/api/exams/${state.exam}`)
                     const data = await response.data
                     shuffle(data)
                     dispatch({type: LOAD_QUESTIONS, payload: data})
