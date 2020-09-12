@@ -117,7 +117,7 @@ const ExamState = props => {
     const getExamList = async () => {
         dispatch({ type: CLEAR_EXAM_CATEGORIES })
         try {
-            const response = await axios.get(`http://localhost:5000/api/exams/`)
+            const response = await axios.get(`/api/exams/`)
             dispatch({ type: GET_EXAMLIST, payload: response.data })
         } catch (err) {
             console.log(err)
@@ -127,7 +127,7 @@ const ExamState = props => {
     // GIVEN A TITLE, GETS A LIST OF ITS CORRESPONDING CATEGORIES AND EACH
     // CATEGORIES QUESTION COUNT.
     const getExamCategories = async () => {
-        const response = await axios.get(`http://localhost:5000/api/exams/${state.exam}/categories`)
+        const response = await axios.get(`/api/exams/${state.exam}/categories`)
         dispatch({ type: GET_ALL_EXAM_CATEGORIES, payload: response.data })
     }
 
