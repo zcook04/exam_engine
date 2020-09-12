@@ -94,11 +94,9 @@ const ContributeExam = () => {
         switch(e.target.name) {
             case ('exam'):
                 setExam(e.target.value)
-                console.log(exam)
                 break
             case ('category'):
                 setCategory(e.target.value)
-                console.log(category)
                 break
             case ('question'):
                 setQuestion(e.target.value)
