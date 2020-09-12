@@ -22,7 +22,6 @@
     transform: translateX(150%) translateY(-150%);
     background: linear-gradient(to bottom right, rgba(0, 184, 194, 0.658), rgba(15, 77, 117, 0.548));
     transition: all .3s ease-in-out;
-    opacity: 92%;
     z-index: 0;
 }
 
@@ -35,6 +34,5 @@
     transform: translateX(0%) translateY(0%) scale(3);
     border-radius: 100%;
     transition: all .3s ease-in-out;
-    opacity: 92%;
     z-index: 11;
 }
