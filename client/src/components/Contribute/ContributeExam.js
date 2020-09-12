@@ -61,7 +61,7 @@ const ContributeExam = () => {
     const submitHandler = async (e) => {        
         e.preventDefault()
         try{
-            await axios.post('http://localhost:5000/api/contribute/question', {
+            await axios.post('/api/contribute/question', {
                 exam,
                 category,
                 question,
