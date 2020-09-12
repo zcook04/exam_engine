@@ -26,7 +26,7 @@ const Exam = () => {
     <div className="exam-container">
         <SearchExam/>
         {(currentQuestion !== null && !inReview) && <CurrentExam />}
-        <ReviewExam  />
+        {(currentQuestion !== null && inReview) && <ReviewExam  />}
        
     </div>
   );
