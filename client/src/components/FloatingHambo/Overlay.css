@@ -13,7 +13,6 @@
 .menu-overlay-container.open {
     z-index: 10;
     transition: all .3s ease-in-out;
-    background: linear-gradient(to bottom right, rgba(0, 184, 194, 0.658), rgba(15, 77, 117, 0.548));
 }
 
 .menu-overlay {
@@ -31,11 +30,10 @@
     position: relative;
     width: 100vw;
     height: 100vh;
-    /* background: linear-gradient(to bottom right, rgba(0, 184, 194, 0.658), rgba(15, 77, 117, 0.548)); */
-    background: rgba(0, 111, 117, 0.658);
+    background: linear-gradient(to bottom right, rgba(0, 184, 194, 0.658), rgba(15, 77, 117, 0.548));
     box-shadow: -15px 15px 35px #0f4c75;
     transform: translateX(0%) translateY(0%) scale(3);
     border-radius: 100%;
     transition: all .3s ease-in-out;
-    z-index: 10;
+    z-index: 11;
 }
