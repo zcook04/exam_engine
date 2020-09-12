@@ -20,8 +20,7 @@
     width: 100vw;
     height: 100vh;
     transform: translateX(150%) translateY(-150%);
-    background: rgba(0, 184, 194, 0.658);
-    background: linear-gradient(to bottom right, hsla(183, 100%, 38%, 0.658), hsla(204, 77%, 26%, 0.548));
+    background: linear-gradient(to bottom right, rgba(0, 184, 194, 0.658), rgba(15, 77, 117, 0.548));
     transition: all .3s ease-in-out;
     opacity: 92%;
     z-index: 0;
@@ -31,10 +30,7 @@
     position: relative;
     width: 100vw;
     height: 100vh;
-    background: 00b7c2;
-    background: rgba(0, 184, 194, 0.658);
-    background: linear-gradient(to bottom right, #00b7c2, #0f4c75);
-    background: rgba(0, 184, 194, 0.658);
+    background: linear-gradient(to bottom right, rgba(0, 184, 194, 0.658), rgba(15, 77, 117, 0.548));
     box-shadow: -15px 15px 35px #0f4c75;
     transform: translateX(0%) translateY(0%) scale(3);
     border-radius: 100%;
