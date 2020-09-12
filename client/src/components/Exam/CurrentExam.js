@@ -33,7 +33,7 @@ const CurrentExam = () => {
                                     />
                         })}
                 <div id="exam-bottom-bar" className={bottomBarClass}>
-                    <span className="exam-nav" onClick={prevQuestion}>Previous Question</span>
+                    <span className="exam-nav" onClick={prevHandler}>Previous Question</span>
                 { //SHOW SUBMIT BUTTON AT END OF TEST
                     (questions && (index === questions.length-1)) ?
                     <span className="exam-nav" onClick={startReview}>Submit and Review</span> :

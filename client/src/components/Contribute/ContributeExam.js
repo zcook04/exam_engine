@@ -6,15 +6,17 @@ import './ContributeExam.css'
 
 import AuthContext from '../../context/auth/authContext'
 import AlertContext from '../../context/alert/alertContext'
+import ExamContext from '../../context/exam/examContext'
 
 const ContributeExam = () => {
     const authContext = useContext(AuthContext)
     const alertContext = useContext(AlertContext)
+    const examContext = useContext(ExamContext)
 
     const { user } = authContext
     const { setAlert } = alertContext
+    const { getExamList, getExamCategories, examList, categories, exam, setExam } = examContext
 
-    const [exam, setExam] = useState('')
     const [category, setCategory] = useState('')
     const [question, setQuestion] = useState('')
     const [questionType, setQuestionType] = useState('')
@@ -25,6 +27,27 @@ const ContributeExam = () => {
     const [explaination, setExplaination] = useState('')
     const [answer, setAnswer] = useState('')
     const [prompts, setPrompts] = useState([])
+
+    useEffect(() => {
+        getExamList()
+        // eslint-disable-next-line
+    }, [])
+
+    useEffect(() => {
+        getExamCategories(exam)
+        // eslint-disable-next-line
+        }, [])
+
+    useEffect(() => {
+        getExamCategories(exam)
+        // eslint-disable-next-line
+        }, [exam])
+
+    useEffect(() => {
+        setCategory(categories && [categories[0].name])
+        // eslint-disable-next-line
+        }, [categories])
+
 
     useEffect(() => {
         setPrompts([
@@ -67,12 +90,15 @@ const ContributeExam = () => {
     }
 
     const changeHandler = (e) => {
+        console.log(e.target.value)
         switch(e.target.name) {
             case ('exam'):
                 setExam(e.target.value)
+                console.log(exam)
                 break
             case ('category'):
                 setCategory(e.target.value)
+                console.log(category)
                 break
             case ('question'):
                 setQuestion(e.target.value)
@@ -108,13 +134,29 @@ const ContributeExam = () => {
             <div className="contribute-exam-form">
                 <form>
                     <label htmlFor="exam" >Name of exam you are contributing to:
-                        <input type="text" value={exam} name="exam" onChange={changeHandler} placeholder="Exam Name" />
+                        <select onChange={changeHandler} name="exam">
+                            <optgroup>
+                                {examList && examList.map(examTitle => {
+                                    return <option key={examTitle} value={examTitle}>{examTitle}</option>
+                                })}
+                            </optgroup>
+                        </select>
                     </label>
                     <label htmlFor="category" >Which category does your question belong to:
-                        <input type="text" value={category} name="category" onChange={changeHandler} placeholder="Category"/>
+                    <select onChange={changeHandler} name="category">
+                            <optgroup name="category">
+                                {categories !== null && categories.map(category => {
+                                    return <option key={category.name} value={category.name}>{category.name}</option>
+                                })}
+                            </optgroup>
+                        </select>
                     </label>
                     <label htmlFor="questionType" >What type of question will this be:
-                        <input type="text" value={questionType} name="questionType" onChange={changeHandler} placeholder="Question Type"/>
+                    <select onChange={changeHandler} name="category">
+                            <optgroup name="category">
+                                <option name="questionType" value="radio">Radio</option>
+                            </optgroup>
+                        </select>
                     </label>
                     <label htmlFor="question" >What question should be asked:
                         <input type="text" value={question} name="question" onChange={changeHandler} placeholder="Question"></input>

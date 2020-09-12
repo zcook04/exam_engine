@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext } from "react"
 
 import ExamContext from "../../context/exam/examContext"
 
@@ -10,13 +10,13 @@ const ExamCategories = () => {
   const examContext = useContext(ExamContext)
   const { categories, updateCategories } = examContext
 
-  const changeHandler = async (e) => {
+  const changeHandler = (e) => {
     const newCategories = categories
     for (let i =0; i < newCategories.length; i++)
       if(newCategories[i].name === e.target.name) {
         newCategories[i].count = e.target.value
       }
-      await updateCategories(newCategories)
+      updateCategories(newCategories)
     }
 
     return (

@@ -35,16 +35,16 @@ const ReviewQuestion = (props) => {
 
                 <span className="review-question-text">{question.question}</span></h3>
             {prompts.map((prompt) => {
-                        return <React.Fragment key={prompt._id}>
-                        <ReviewPrompts  
-                                    key={prompt._id} 
-                                    id={question.id}
-                                    isAnswer={prompt.prompt.isAnswer}
-                                    text={prompt.prompt.text}
-                                    />
-                                <Explaination />
-                                </React.Fragment>
-                        })}
+                return <React.Fragment key={prompt._id}>
+                <ReviewPrompts  
+                            key={prompt._id} 
+                            id={question.id}
+                            isAnswer={prompt.prompt.isAnswer}
+                            text={prompt.prompt.text}
+                            />
+                        <Explaination />
+                        </React.Fragment>
+                })}
         </div>
     );
 };

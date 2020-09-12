@@ -82,7 +82,6 @@ export default (state, action) => {
             return {
                 ...state,
                 inReview: false,
-                categories: null, //NEEDS TO BE REMOVED ONCE CATEGORY SEARCH FUNCTION WORKS.
                 index: 0,
                 questions: [],
                 currentQuestion: null,

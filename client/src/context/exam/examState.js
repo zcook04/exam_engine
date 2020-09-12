@@ -59,6 +59,7 @@ const ExamState = props => {
     // RETURNS EXAM QUESTIONS WITH SPECIFIED COUNTS FROM EACH CATEGORY.
     const getQuestions = async () => {
         resetExam()
+        if(state.exam !== null){
             try { 
                 if(state.categories !== null) {
                     const categoryString = setCategoryString()
@@ -78,6 +79,7 @@ const ExamState = props => {
                 console.log(err)
             }
         }
+    }
 
     //ADDS OR MODIFIES CURRENT EXAMS ANSWERS BASED ON QUESTION ID BEING TRUE OR FALSE
     const updateAnswers = (newAnswer) => {
