@@ -32,29 +32,30 @@ const ReviewExam = () => {
     let [correctCount, correctAnswers, wrongCount, wrongAnswers] = sortAnswers()
     
     let examScore = (correctCount/(correctCount+wrongCount))*100
-
-    return (
-        
-        <div className={inReview ? "exam-review-container" : "exam-review-container hidden"}>
-            <h3 className="exam-score">You scored: {examScore}%</h3>
-
-            <div className="wrong-answers">
-            {
-                wrongAnswers.map(answer => {
-                    return <div key={answer} className="review-question-wrong">
-                    <ReviewQuestion wasAnswer={false} key={answer} id={answer} exam={exam}/>
-                    </div>
-            })}
+    
+        return (
+            <div className={inReview ? "exam-review-container" : "exam-review-container hidden"}>
+                <h3 className="exam-score">You scored: {examScore}%</h3>
+    
+                <div className="wrong-answers">
+                {
+                    wrongAnswers.map(answer => {
+                        return <div key={answer} className="review-question-wrong">
+                        <ReviewQuestion wasAnswer={false} key={answer} id={answer} exam={exam}/>
+                        </div>
+                })}
+                </div>
+                <div className="correct-answers">
+                {
+                    correctAnswers.map(answer => {
+                        return <ReviewQuestion wasAnswer={true} key={answer} id={answer} exam={exam}/>
+                })}
+                </div>
+    
             </div>
-            <div className="correct-answers">
-            {
-                correctAnswers.map(answer => {
-                    return <ReviewQuestion wasAnswer={true} key={answer} id={answer} exam={exam}/>
-            })}
-            </div>
+        );
+    
 
-        </div>
-    );
 };
 
 export default ReviewExam;

@@ -10,7 +10,6 @@ const SearchExams = props => {
 
     useEffect(() => {
         getExamList()
-        setExam('ccna')
         // eslint-disable-next-line
     }, [])
 
