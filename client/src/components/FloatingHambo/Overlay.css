@@ -34,6 +34,7 @@
     background: 00b7c2;
     background: rgba(0, 184, 194, 0.658);
     background: linear-gradient(to bottom right, #00b7c2, #0f4c75);
+    background: rgba(0, 184, 194, 0.658);
     box-shadow: -15px 15px 35px #0f4c75;
     transform: translateX(0%) translateY(0%) scale(3);
     border-radius: 100%;
