@@ -13,6 +13,7 @@
 .menu-overlay-container.open {
     z-index: 10;
     transition: all .3s ease-in-out;
+    background: linear-gradient(to bottom right, rgba(0, 184, 194, 0.658), rgba(15, 77, 117, 0.548));
 }
 
 .menu-overlay {
@@ -20,7 +21,7 @@
     width: 100vw;
     height: 100vh;
     transform: translateX(150%) translateY(-150%);
-    /* background: linear-gradient(to bottom right, rgba(0, 184, 194, 0.658), rgba(15, 77, 117, 0.548)); */
+    background: linear-gradient(to bottom right, rgba(0, 184, 194, 0.658), rgba(15, 77, 117, 0.548));
     transition: all .3s ease-in-out;
     opacity: 92%;
     z-index: 0;
