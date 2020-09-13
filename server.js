@@ -29,7 +29,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/contribute/', require('./routes/contribute'));
 app.use('/api/exams/', require('./routes/exams'));
 
-if (!config.get('NODE_ENV')) {
+if (process.env.PROD) {
   app.use(express.static(path.join(__dirname, 'client', 'build')));
 
   app.get('*', (req, res) => {
