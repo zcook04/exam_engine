@@ -3,11 +3,12 @@ import React, { useState, useEffect } from 'react';
 import './Login.css';
 
 import { login, register, clearErrors } from '../../actions/authActions';
+import { setAlert } from '../../actions/alertActions';
 import { connect } from 'react-redux';
 
 const Login = (props) => {
-  const { setAlert, register, login } = props;
-  const { error, clearErrors, isAuthenticated } = props.auth;
+  const { setAlert, register, login, clearErrors } = props;
+  const { error, isAuthenticated } = props.auth;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -15,12 +16,12 @@ const Login = (props) => {
     }
 
     if (error === 'User already exists') {
-      setAlert(error);
+      setAlert('error', error);
       clearErrors();
     }
 
     if (error === 'Invalid Credentials') {
-      setAlert(error);
+      setAlert('error', error);
       clearErrors();
     }
     //eslint-disable-next-line
@@ -42,9 +43,9 @@ const Login = (props) => {
   const onRegister = (e) => {
     e.preventDefault();
     if (name === '' || email === '' || password === '') {
-      setAlert('Please enter all fields.');
+      setAlert('error', 'Please enter all fields.');
     } else if (password !== password2) {
-      setAlert('Passwords do not match');
+      setAlert('error', 'Passwords do not match');
     } else {
       register({
         name,
@@ -57,7 +58,7 @@ const Login = (props) => {
   const onSignin = (e) => {
     e.preventDefault();
     if (email === '' || password === '') {
-      setAlert('Email and Password is required');
+      setAlert('error', 'Email and Password is required');
     } else {
       login({
         email,
@@ -184,10 +185,12 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  alerts: state.alert,
 });
 
 export default connect(mapStateToProps, {
   login,
   register,
   clearErrors,
+  setAlert,
 })(Login);

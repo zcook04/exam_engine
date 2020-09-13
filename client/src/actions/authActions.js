@@ -88,6 +88,6 @@ export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
 };
 
-export const clearErrors = () => {
-  return { type: CLEAR_ERRORS };
+export const clearErrors = () => (dispatch) => {
+  dispatch({ type: CLEAR_ERRORS });
 };

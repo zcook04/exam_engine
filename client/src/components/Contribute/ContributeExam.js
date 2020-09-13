@@ -4,17 +4,17 @@ import axios from 'axios';
 import './ContributeExam.css';
 
 import { connect } from 'react-redux';
-import { loadUser } from '../../actions/authActions';
 
-import AlertContext from '../../context/alert/alertContext';
+import { loadUser } from '../../actions/authActions';
+import { setAlert } from '../../actions/alertActions';
+
 import ExamContext from '../../context/exam/examContext';
 
 const ContributeExam = (props) => {
-  const alertContext = useContext(AlertContext);
-  const examContext = useContext(ExamContext);
-
   const { user } = props.auth;
-  const { setAlert } = alertContext;
+  const { setAlert } = props;
+
+  const examContext = useContext(ExamContext);
   const {
     getExamList,
     getExamCategories,
@@ -265,6 +265,7 @@ const ContributeExam = (props) => {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  alert: state.alert,
 });
 
-export default connect(mapStateToProps, { loadUser })(ContributeExam);
+export default connect(mapStateToProps, { loadUser, setAlert })(ContributeExam);
