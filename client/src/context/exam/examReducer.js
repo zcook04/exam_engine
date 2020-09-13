@@ -11,7 +11,9 @@ import {
     SET_EXAM,
     GET_ALL_EXAM_CATEGORIES,
     CLEAR_EXAM_CATEGORIES,
-    UPDATE_EXAM_CATEGORIES
+    UPDATE_EXAM_CATEGORIES,
+    SET_LOADING,
+    CLEAR_LOADING
 } from '../types'
 
 export default (state, action) => {
@@ -26,15 +28,30 @@ export default (state, action) => {
                 ...state,
                 inReview: false
             }
+        case SET_LOADING:
+            return {
+                ...state,
+                loading: true
+            }
+        case CLEAR_LOADING:
+            return {
+                ...state,
+                loading: false
+            }
         case LOAD_QUESTIONS:
             return {
                 ...state,
                 questions: action.payload,
+                answers: null,
+                inReview: false,
+                loading: false,
+                index: 0
             }
         case INITIALIZE_CURRENT_QUESTION:
             return {
                 ...state,
-                currentQuestion: state.questions[state.index]
+                currentQuestion: state.questions[state.index],
+                loading: false
             }
         case INCREMENT_INDEX:
             return {
@@ -56,17 +73,20 @@ export default (state, action) => {
         case GET_EXAMLIST:
             return {
                 ...state,
-                examList: action.payload
+                examList: action.payload,
+                loading: false
             }
         case SET_EXAM:
             return {
                 ...state,
-                exam: action.payload
+                exam: action.payload,
+                loading: false
             }
         case GET_ALL_EXAM_CATEGORIES:
             return {
                 ...state,
-                categories: action.payload
+                categories: action.payload,
+                loading: false
             }
         case UPDATE_EXAM_CATEGORIES:
             return {
@@ -83,9 +103,12 @@ export default (state, action) => {
                 ...state,
                 inReview: false,
                 index: 0,
+                exam: null,
+                categories: null,
                 questions: [],
                 currentQuestion: null,
-                answers: null
+                answers: null,
+                loading: false
             }
         default:
             return state

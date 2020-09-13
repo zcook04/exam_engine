@@ -13,15 +13,16 @@ const ExamPrompts = (props) => {
   const {text, isAnswer } = props
 
   const changeHandler = (e) => {
+    console.log(e.target.name)
     if(e.target.value && isAnswer) {
       const currentAnswers = { ...answers }
       currentAnswers[e.target.value] = true
-    updateAnswers({...currentAnswers})
+      updateAnswers({...currentAnswers})
     }
     if(e.target.value && !isAnswer) {
       const currentAnswers = { ...answers }
       currentAnswers[e.target.value] = false
-    updateAnswers({...currentAnswers}) 
+      updateAnswers({...currentAnswers})
     }
   }
 

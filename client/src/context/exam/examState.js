@@ -15,7 +15,9 @@ import {
     SET_EXAM,
     GET_ALL_EXAM_CATEGORIES,
     CLEAR_EXAM_CATEGORIES,
-    UPDATE_EXAM_CATEGORIES
+    UPDATE_EXAM_CATEGORIES,
+    SET_LOADING,
+    CLEAR_LOADING
 } from '../types'
 
 const ExamState = props => {
@@ -23,11 +25,12 @@ const ExamState = props => {
         inReview: false,
         categories: null,
         index: 0,
-        exam: 'ccna',
+        exam: null,
         questions: [],
         currentQuestion: null,
         answers: null,
-        examList: null
+        examList: null,
+        loading: false
     }
 
     const [state, dispatch] = useReducer(examReducer, initialState)
@@ -40,6 +43,11 @@ const ExamState = props => {
     // SETS INREVIEW STATE TO FALSE
     const endReview = () => {
         dispatch({ type: REMOVE_INREVIEW })
+    }
+
+    // SETS LOADING TO TRUE
+    const setLoading = () => {
+        dispatch({ type: SET_LOADING })
     }
 
     // USED TO RANDOMIZE ORDER OF QUESTIONS RECEIVED FROM DB
@@ -58,27 +66,31 @@ const ExamState = props => {
     // EXAM?CATEGORY=COUNT&CATEGORY=COUNT
     // RETURNS EXAM QUESTIONS WITH SPECIFIED COUNTS FROM EACH CATEGORY.
     const getQuestions = async () => {
-        resetExam()
-        if(state.exam !== null){
-            try { 
-                if(state.categories !== null) {
-                    const categoryString = setCategoryString()
-                    let response = await axios.get(`/api/exams/${state.exam}${categoryString}`)
-                    const data = await response.data
-                    shuffle(data)
-                    dispatch({type: LOAD_QUESTIONS, payload: data})
-                    dispatch({ type: INITIALIZE_CURRENT_QUESTION})
-                } else {
-                    let response = await axios.get(`/api/exams/${state.exam}`)
-                    const data = await response.data
-                    shuffle(data)
-                    dispatch({type: LOAD_QUESTIONS, payload: data})
-                    dispatch({ type: INITIALIZE_CURRENT_QUESTION})
-                }
-            } catch(err) {
-                console.log(err)
+        dispatch({type: SET_LOADING })
+        try { 
+            if(state.categories !== null) {
+                dispatch( { type: SET_LOADING })
+                const categoryString = setCategoryString()
+                let response = await axios.get(`/api/exams/${state.exam}${categoryString}`)
+                const data = await response.data
+                shuffle(data)
+                dispatch({type: LOAD_QUESTIONS, payload: data})
+                dispatch({ type: INITIALIZE_CURRENT_QUESTION})
+            } else {
+                dispatch( { type: SET_LOADING })
+                let response = await axios.get(`/api/exams/${state.exam}`)
+                const data = await response.data
+                shuffle(data)
+                dispatch({type: LOAD_QUESTIONS, payload: data})
+                dispatch({ type: INITIALIZE_CURRENT_QUESTION})
             }
+        } catch(err) {
+            console.log(err)
         }
+        
+        dispatch({ type: CLEAR_LOADING })
+        return
+        
     }
 
     //ADDS OR MODIFIES CURRENT EXAMS ANSWERS BASED ON QUESTION ID BEING TRUE OR FALSE
@@ -117,6 +129,7 @@ const ExamState = props => {
     const getExamList = async () => {
         dispatch({ type: CLEAR_EXAM_CATEGORIES })
         try {
+            dispatch({ type: SET_LOADING })
             const response = await axios.get(`/api/exams/`)
             dispatch({ type: GET_EXAMLIST, payload: response.data })
         } catch (err) {
@@ -127,8 +140,11 @@ const ExamState = props => {
     // GIVEN A TITLE, GETS A LIST OF ITS CORRESPONDING CATEGORIES AND EACH
     // CATEGORIES QUESTION COUNT.
     const getExamCategories = async () => {
-        const response = await axios.get(`/api/exams/${state.exam}/categories`)
-        dispatch({ type: GET_ALL_EXAM_CATEGORIES, payload: response.data })
+        if(state.exam !== null) {
+            dispatch({ type: SET_LOADING })
+            const response = await axios.get(`/api/exams/${state.exam}/categories`)
+            dispatch({ type: GET_ALL_EXAM_CATEGORIES, payload: response.data })
+        }
     }
 
     const updateCategories = (updatedCategories) => {
@@ -138,6 +154,7 @@ const ExamState = props => {
 
     // UPDATES THE EXAM STATE WITH NEW EXAM VALUE
     const setExam = (examValue) => {
+        dispatch({ type: SET_LOADING })
         dispatch({ type: SET_EXAM, payload: examValue })
     }
 
@@ -168,6 +185,8 @@ const ExamState = props => {
                 currentQuestion: state.currentQuestion,
                 answers: state.answers,
                 examList: state.examList,
+                loading: state.loading,
+                setLoading,
                 getExamList,
                 startReview,
                 endReview,

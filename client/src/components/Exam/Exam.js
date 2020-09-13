@@ -1,4 +1,5 @@
 import React, {useContext, useEffect} from 'react';
+import ClipLoader from "react-spinners/ClockLoader"
 
 import SearchExam from "./SearchExams"
 import CurrentExam from "./CurrentExam"
@@ -15,7 +16,7 @@ const Exam = () => {
     const authContext = useContext(AuthContext)
     const examContext = useContext(ExamContext)
 
-    const { inReview, currentQuestion } = examContext
+    const { inReview, currentQuestion, loading } = examContext
 
     useEffect(() => {
         authContext.loadUser()
@@ -25,8 +26,9 @@ const Exam = () => {
   return (
     <div className="exam-container">
         <SearchExam/>
-        {(currentQuestion !== null && !inReview) && <CurrentExam />}
-        {(currentQuestion !== null && inReview) && <ReviewExam  />}
+        {loading && <ClipLoader loading={loading} size={200} css={{margin: "auto"}}/>}
+        {(currentQuestion !== null && !inReview &&!loading) && <CurrentExam />}
+        {(currentQuestion !== null && inReview &&!loading) && <ReviewExam  />}
        
     </div>
   );
