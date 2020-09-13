@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import './Login.css';
 
-import PropTypes from 'prop-types';
 import { login, register, clearErrors } from '../../actions/authActions';
 import { connect } from 'react-redux';
 
