@@ -4,8 +4,30 @@
     display: flex;
 }
 
+.select-exam {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: .5rem;
+}
+
+
+
 .contribute-exam-form {
     width: 100%;
+}
+.contribute-exam-form label {
+    color: #00B7C2;
+    font-weight: 700;
+}
+
+.contribute-exam-form h2 {
+    color: #00B7C2;
+}
+
+.contribute-exam-form .exam-line {
+    background: #00B7C2;
+    height: 1px;
 }
 
 .contribute-exam-form input {
@@ -13,10 +35,15 @@
     display: block;
     margin-bottom: 2rem;
     margin-top: .2rem;
+    padding: .5rem;
+}
+
+#exam-answer {
+    padding: .5rem;
+    border-radius: 5px;
 }
 
 .contribute-exam-form select {
-    min-width: 50%;
     display: block;
     margin-bottom: 2rem;
     margin-top: .2rem;
@@ -26,3 +53,8 @@
     width: 100%;
 }
 
+.exam-selector {
+    width: 30%;
+    border-radius: 5px;
+    padding: .5rem;
+}

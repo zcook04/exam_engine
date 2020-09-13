@@ -19,7 +19,7 @@ const ContributeExam = () => {
 
     const [category, setCategory] = useState('')
     const [question, setQuestion] = useState('')
-    const [questionType, setQuestionType] = useState('')
+    const [questionType, setQuestionType] = useState('radio')
     const [prompt1, setPrompt1] = useState('')
     const [prompt2, setPrompt2] = useState('')
     const [prompt3, setPrompt3] = useState('')
@@ -34,19 +34,14 @@ const ContributeExam = () => {
     }, [])
 
     useEffect(() => {
-        getExamCategories(exam)
+        setExam('')
         // eslint-disable-next-line
-        }, [])
+    }, [])
 
     useEffect(() => {
         getExamCategories(exam)
         // eslint-disable-next-line
         }, [exam])
-
-    useEffect(() => {
-        setCategory(categories && [categories[0].name])
-        // eslint-disable-next-line
-        }, [categories])
 
 
     useEffect(() => {
@@ -60,6 +55,7 @@ const ContributeExam = () => {
 
     const submitHandler = async (e) => {        
         e.preventDefault()
+
         try{
             await axios.post('/api/contribute/question', {
                 exam,
@@ -129,33 +125,34 @@ const ContributeExam = () => {
     return (
         <div className="contribute-exam-container">
             <div className="contribute-exam-form">
+                <h2>Contribute an exam question</h2>
+                <div className="exam-line"> </div>
                 <form>
-                    <label htmlFor="exam" >Name of exam you are contributing to:
-                        <select onChange={changeHandler} name="exam">
+                    <div className="select-exam">
+                        <select className="exam-selector" onChange={changeHandler} name="exam">
                             <optgroup>
+                                <option defaultValue>Select an exam</option>
                                 {examList && examList.map(examTitle => {
                                     return <option key={examTitle} value={examTitle}>{examTitle}</option>
                                 })}
                             </optgroup>
                         </select>
-                    </label>
-                    <label htmlFor="category" >Which category does your question belong to:
-                    <select onChange={changeHandler} name="category">
+                        <select className="exam-selector" onChange={changeHandler} name="category">
                             <optgroup name="category">
+                                <option defaultValue>Select a category</option>
                                 {categories !== null && categories.map(category => {
                                     return <option key={category.name} value={category.name}>{category.name}</option>
                                 })}
                             </optgroup>
                         </select>
-                    </label>
-                    <label htmlFor="questionType" >What type of question will this be:
-                    <select onChange={changeHandler} name="category">
-                            <optgroup name="category">
+                        <select className="exam-selector" onChange={changeHandler} name="questionType">
+                            <optgroup name="questionType">
+                                <option defaultValue>Select type of question</option>
                                 <option name="questionType" value="radio">Radio</option>
                             </optgroup>
                         </select>
-                    </label>
-                    <label htmlFor="question" >What question should be asked:
+                    </div>
+                    <label htmlFor="question" >Question:
                         <input type="text" value={question} name="question" onChange={changeHandler} placeholder="Question"></input>
                     </label>
                     <label htmlFor="prompt1" >Prompt 1:
@@ -171,7 +168,7 @@ const ContributeExam = () => {
                         <input type="text" value={prompt4} name="prompt4" onChange={changeHandler} placeholder="Prompt4"/>
                         </label>
                     <label htmlFor="answer">What is the correct answer:
-                        <select name="answer" id="answer" onChange={changeHandler}>
+                        <select name="answer" id="exam-answer" onChange={changeHandler}>
                             <option value="defaultValue">Please select the correct answer</option>
                             {prompt1 && <option value={prompt1}>{prompt1}</option>}
                             {prompt2 && <option value={prompt2}>{prompt2}</option>}
@@ -180,7 +177,7 @@ const ContributeExam = () => {
                         </select>
                     </label>
                     <label htmlFor="explaination" >Provide an explaination to help users understand the topic better:
-                        <input type="text" value={explaination} name="explaination" onChange={changeHandler} placeholder="Explaination"/>
+                        <input type="text-box" value={explaination} name="explaination" onChange={changeHandler} placeholder="Explaination"/>
                         </label>
                     <button onClick={submitHandler}>Submit</button>
                 </form>

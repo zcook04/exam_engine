@@ -18,6 +18,8 @@ router.post('/question', async (req, res) => {
                 exam, category, question, questionType,
                 prompts, explainations, contributedBy
             })
+
+            console.log(contributeQuestion)
             const savedQuestion = await contributeQuestion.save((err, response) => {
                 if(err) {
                     console.log(err)
