@@ -1,21 +1,21 @@
-import React, { useContext, useEffect } from 'react';
-import ContributeExam from './ContributeExam'
+import React, { useEffect } from 'react';
+import ContributeExam from './ContributeExam';
 
-import AuthContext from '../../context/auth/authContext';
+import { connect } from 'react-redux';
+import { loadUser } from '../../actions/authActions';
 
-const Contribute = () => {
-    const authContext = useContext(AuthContext)
+const Contribute = (props) => {
+  const { loadUser } = props;
+  useEffect(() => {
+    loadUser();
+    // eslint-disable-next-line
+  }, []);
 
-    useEffect(() => {
-        authContext.loadUser()
-        // eslint-disable-next-line
-    }, [])
-
-    return (
-        <div className="contibute-page">
-            <ContributeExam />
-        </div>
-    )
+  return (
+    <div className="contibute-page">
+      <ContributeExam />
+    </div>
+  );
 };
 
-export default Contribute;
+export default connect(null, { loadUser })(Contribute);

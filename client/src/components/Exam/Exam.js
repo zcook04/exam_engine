@@ -1,37 +1,42 @@
-import React, {useContext, useEffect} from 'react';
-import ClipLoader from "react-spinners/ClockLoader"
+import React, { useContext, useEffect } from 'react';
+import ClipLoader from 'react-spinners/ClockLoader';
 
-import SearchExam from "./SearchExams"
-import CurrentExam from "./CurrentExam"
-import ReviewExam from "./ReviewExam"
+import SearchExam from './SearchExams';
+import CurrentExam from './CurrentExam';
+import ReviewExam from './ReviewExam';
 
-import AuthContext from "../../context/auth/authContext"
-import ExamContext from "../../context/exam/examContext"
+import ExamContext from '../../context/exam/examContext';
+import { connect } from 'react-redux';
 
-import "./Exam.css"
+import { loadUser } from '../../actions/authActions';
 
+import './Exam.css';
 
+const Exam = (props) => {
+  const examContext = useContext(ExamContext);
+  const { auth } = props;
 
-const Exam = () => {
-    const authContext = useContext(AuthContext)
-    const examContext = useContext(ExamContext)
+  const { inReview, currentQuestion, loading } = examContext;
 
-    const { inReview, currentQuestion, loading } = examContext
-
-    useEffect(() => {
-        authContext.loadUser()
-        // eslint-disable-next-line
-    }, [])
+  useEffect(() => {
+    auth.token !== null && auth.token && loadUser();
+    // eslint-disable-next-line
+  }, [auth.token]);
 
   return (
     <div className="exam-container">
-        <SearchExam/>
-        {loading && <ClipLoader loading={loading} size={200} css={{margin: "auto"}}/>}
-        {(currentQuestion !== null && !inReview &&!loading) && <CurrentExam />}
-        {(currentQuestion !== null && inReview &&!loading) && <ReviewExam  />}
-       
+      <SearchExam />
+      {loading && (
+        <ClipLoader loading={loading} size={200} css={{ margin: 'auto' }} />
+      )}
+      {currentQuestion !== null && !inReview && !loading && <CurrentExam />}
+      {currentQuestion !== null && inReview && !loading && <ReviewExam />}
     </div>
   );
-}
+};
 
-export default Exam;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { loadUser })(Exam);

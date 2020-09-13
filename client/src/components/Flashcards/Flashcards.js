@@ -1,17 +1,20 @@
-import React, { useContext, useEffect } from 'react';
-import AuthContext from '../../context/auth/authContext';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+
+import { loadUser } from '../../actions/authActions';
 
 const Flashcards = (props) => {
-    const authContext = useContext(AuthContext)
+  const { auth } = props;
+  useEffect(() => {
+    auth.token !== null && auth.token && loadUser();
+    // eslint-disable-next-line
+  }, [auth.token]);
 
-    useEffect(() => {
-        authContext.loadUser()
-        // eslint-disable-next-line
-    }, [])
-
-    return (
-        <h1>FLASHCARDS</h1>
-    )
+  return <h1>FLASHCARDS</h1>;
 };
 
-export default Flashcards;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { loadUser })(Flashcards);
