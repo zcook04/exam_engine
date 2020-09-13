@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -10,13 +10,11 @@ import { loadUser } from '../../actions/authActions';
 
 import './Navbar.css';
 
-const Navbar = ({ auth }) => {
+const Navbar = ({ auth, loadUser }) => {
   useEffect(() => {
-    auth.isAuthenticated !== null && loadUser();
+    auth.token !== null && auth.token && loadUser();
     // eslint-disable-next-line
-  }, [auth.isAuthenticated]);
-
-  console.log(auth.isAuthenticated);
+  }, [auth.token]);
 
   const [navOpen, setNavOpen] = useState(false);
 

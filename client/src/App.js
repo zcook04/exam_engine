@@ -42,6 +42,7 @@ function App() {
                 <Route exact path="/exam" component={Exam} />
                 <Route exact path="/flashcards" component={Flashcards} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/logout" component={Home} />
                 <PrivateRoute exact path="/forum" component={Forum} />
                 <PrivateRoute exact path="/contribute" component={Contribute} />
               </Switch>

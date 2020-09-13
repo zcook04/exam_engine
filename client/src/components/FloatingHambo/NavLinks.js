@@ -8,7 +8,7 @@ import { logout, loadUser } from '../../actions/authActions';
 import './NavLinks.css';
 
 const NavLinks = (props) => {
-  const { navOpen, setNavOpen } = props;
+  const { navOpen, setNavOpen, loadUser, logout, auth } = props;
   const { isAuthenticated, user } = props.auth;
 
   const wrapperClass = navOpen ? 'navlinks-wrapper' : 'navlinks-wrapper hidden';
@@ -17,9 +17,9 @@ const NavLinks = (props) => {
     : 'navlinks-container hidden';
 
   useEffect(() => {
-    loadUser();
+    auth.token !== null && auth.token && loadUser();
     // eslint-disable-next-line
-  }, []);
+  }, [auth.token]);
 
   const navlinkHandler = () => {
     navOpen ? setNavOpen(false) : setNavOpen(true);
