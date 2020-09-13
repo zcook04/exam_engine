@@ -51,27 +51,32 @@ const ContributeExam = (props) => {
 
   useEffect(() => {
     setPrompts([
-      { prompt: { text: prompt1, isAnswer: answer === prompt1 } },
-      { prompt: { text: prompt2, isAnswer: answer === prompt2 } },
-      { prompt: { text: prompt3, isAnswer: answer === prompt3 } },
-      { prompt: { text: prompt4, isAnswer: answer === prompt4 } },
+      { name: 'prompt1', text: prompt1 },
+      { name: 'prompt2', text: prompt2 },
+      { name: 'prompt3', text: prompt3 },
+      { name: 'prompt4', text: prompt4 },
     ]);
-  }, [prompt1, prompt2, prompt3, prompt4, answer]);
+  }, [prompt1, prompt2, prompt3, prompt4]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
     try {
+      console.log(answer);
       await axios.post('/api/contribute/question', {
         exam,
         category,
         question,
         questionType,
         prompts,
+        answer,
+        selectedAnswer: null,
         explainations: [
           {
-            contributedBy: user._id,
             text: explaination,
+            user: user._id,
+            rating: 0,
+            comments: [],
           },
         ],
         contributedBy: user._id,
@@ -122,7 +127,13 @@ const ContributeExam = (props) => {
         setExplaination(e.target.value);
         break;
       case 'answer':
-        setAnswer(e.target.value);
+        let formAnswer;
+        prompts.forEach((prompt) => {
+          if (prompt.text === e.target.value) {
+            formAnswer = prompt.name;
+          }
+        });
+        setAnswer(formAnswer);
         break;
       default:
         break;
@@ -239,10 +250,26 @@ const ContributeExam = (props) => {
               <option value="defaultValue">
                 Please select the correct answer
               </option>
-              {prompt1 && <option value={prompt1}>{prompt1}</option>}
-              {prompt2 && <option value={prompt2}>{prompt2}</option>}
-              {prompt3 && <option value={prompt3}>{prompt3}</option>}
-              {prompt4 && <option value={prompt4}>{prompt4}</option>}
+              {prompt1 && (
+                <option value={prompt1} name="prompt1">
+                  {prompt1}
+                </option>
+              )}
+              {prompt2 && (
+                <option value={prompt2} name="prompt1">
+                  {prompt2}
+                </option>
+              )}
+              {prompt3 && (
+                <option value={prompt3} name="prompt1">
+                  {prompt3}
+                </option>
+              )}
+              {prompt4 && (
+                <option value={prompt4} name="prompt1">
+                  {prompt4}
+                </option>
+              )}
             </select>
           </label>
           <label htmlFor="explaination">
