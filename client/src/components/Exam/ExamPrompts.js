@@ -1,37 +1,49 @@
-import React, { useContext } from "react"
+import React from 'react';
+import { connect } from 'react-redux';
 
-import ExamContext from "../../context/exam/examContext"
+import { updateAnswers } from '../../actions/examActions';
 
-import "./ExamPrompt.css"
-
-
+import './ExamPrompt.css';
 
 const ExamPrompts = (props) => {
-  const examContext = useContext(ExamContext)
-  const { updateAnswers, answers, currentQuestion } = examContext
+  const { updateAnswers } = props;
+  const { answers, currentQuestion } = props.exam;
 
-  const {text, isAnswer } = props
+  const { text, isAnswer } = props;
 
   const changeHandler = (e) => {
-    console.log(e.target.name)
-    if(e.target.value && isAnswer) {
-      const currentAnswers = { ...answers }
-      currentAnswers[e.target.value] = true
-      updateAnswers({...currentAnswers})
+    console.log(e.target.name);
+    if (e.target.value && isAnswer) {
+      const currentAnswers = { ...answers };
+      currentAnswers[e.target.value] = true;
+      updateAnswers({ ...currentAnswers });
     }
-    if(e.target.value && !isAnswer) {
-      const currentAnswers = { ...answers }
-      currentAnswers[e.target.value] = false
-      updateAnswers({...currentAnswers})
+    if (e.target.value && !isAnswer) {
+      const currentAnswers = { ...answers };
+      currentAnswers[e.target.value] = false;
+      updateAnswers({ ...currentAnswers });
     }
-  }
+  };
 
-    return (
-      <div className="prompt-container">
-        <input value={currentQuestion._id} name={currentQuestion} onChange={changeHandler} type="radio" />
-        <p>{text}</p>
-      </div>
-    );
-  }
-  
-export default ExamPrompts;
+  return (
+    <div className="prompt-container">
+      <input
+        value={currentQuestion._id}
+        name={currentQuestion}
+        onChange={changeHandler}
+        type="radio"
+      />
+      <p>{text}</p>
+    </div>
+  );
+};
+
+const mapDispatchToProps = {
+  updateAnswers,
+};
+
+const mapStateToProps = (state) => ({
+  exam: state.exam,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExamPrompts);

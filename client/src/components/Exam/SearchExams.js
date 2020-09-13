@@ -1,22 +1,26 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import ExamCategories from './ExamCategories';
 
-import ExamState from '../../context/exam/examContext';
+import { connect } from 'react-redux';
+
+import {
+  getQuestions,
+  getExamList,
+  getExamCategories,
+  resetExam,
+  setExam,
+} from '../../actions/examActions';
 
 const SearchExams = (props) => {
-  const examState = useContext(ExamState);
   const {
     getQuestions,
-    examList,
     getExamList,
-    setExam,
-    categories,
     getExamCategories,
-    exam,
     resetExam,
-    loading,
-  } = examState;
+    setExam,
+  } = props;
+  const { examList, categories, exam, loading } = props.exam;
 
   useEffect(() => {
     getExamList();
@@ -64,4 +68,16 @@ const SearchExams = (props) => {
   );
 };
 
-export default SearchExams;
+const mapDispatchToProps = {
+  getQuestions,
+  getExamList,
+  getExamCategories,
+  resetExam,
+  setExam,
+};
+
+const mapStateToProps = (state) => ({
+  exam: state.exam,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchExams);

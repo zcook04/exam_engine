@@ -1,34 +1,50 @@
-import React, { useContext } from "react"
+import React from 'react';
+import { connect } from 'react-redux';
 
-import ExamContext from "../../context/exam/examContext"
+import './ExamCategories.css';
 
-import "./ExamCategories.css"
+import { updateCategories } from '../../actions/examActions';
 
-
-
-const ExamCategories = () => {
-  const examContext = useContext(ExamContext)
-  const { categories, updateCategories } = examContext
+const ExamCategories = (props) => {
+  const { categories } = props.exam;
+  const { updateCategories } = props;
 
   const changeHandler = (e) => {
-    const newCategories = categories
-    for (let i =0; i < newCategories.length; i++)
-      if(newCategories[i].name === e.target.name) {
-        newCategories[i].count = e.target.value
+    const newCategories = categories;
+    for (let i = 0; i < newCategories.length; i++)
+      if (newCategories[i].name === e.target.name) {
+        newCategories[i].count = e.target.value;
       }
-      updateCategories(newCategories)
-    }
+    updateCategories(newCategories);
+  };
 
-    return (
-            <div className="category-container">
-                {categories.map((category) =>{
-                    return <h3 key={category.name}>
-                      <input type="number" min="0" max={category.max} defaultValue={category.count} name={category.name} onChange={changeHandler}/> 
-                      {category.name}
-                      </h3>
-                })}
-            </div>
-    );
-  }
-  
-export default ExamCategories;
+  return (
+    <div className="category-container">
+      {categories.map((category) => {
+        return (
+          <h3 key={category.name}>
+            <input
+              type="number"
+              min="0"
+              max={category.max}
+              defaultValue={category.count}
+              name={category.name}
+              onChange={changeHandler}
+            />
+            {category.name}
+          </h3>
+        );
+      })}
+    </div>
+  );
+};
+
+const mapDispatchToProps = {
+  updateCategories,
+};
+
+const mapStateToProps = (state) => ({
+  exam: state.exam,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExamCategories);

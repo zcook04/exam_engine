@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import {
   SET_INREVIEW,
   REMOVE_INREVIEW,
@@ -48,12 +50,13 @@ export const shuffle = (arr) => {
 
 // EXAM?CATEGORY=COUNT&CATEGORY=COUNT
 // RETURNS EXAM QUESTIONS WITH SPECIFIED COUNTS FROM EACH CATEGORY.
-export const getQuestions = () => async (dispatch) => {
+export const getQuestions = () => async (dispatch, getState) => {
+  const state = getState().exam;
   dispatch({ type: SET_LOADING });
   try {
     if (state.categories !== null) {
       dispatch({ type: SET_LOADING });
-      const categoryString = setCategoryString();
+      const categoryString = setCategoryString(state);
       let response = await axios.get(
         `/api/exams/${state.exam}${categoryString}`
       );
@@ -88,7 +91,8 @@ export const resetExam = () => (dispatch) => {
 };
 
 // INCREASES INDEX AND MOVES TO THE NEXT INDEXED QUESTION
-export const nextQuestion = () => (dispatch) => {
+export const nextQuestion = () => (dispatch, getState) => {
+  const state = getState().exam;
   if (state.questions.length - 1 !== state.index) {
     try {
       dispatch({ type: INCREMENT_INDEX });
@@ -99,7 +103,8 @@ export const nextQuestion = () => (dispatch) => {
 };
 
 // DECREASES INDEX AND MOVES TO PREVIOUS QUESTION
-export const prevQuestion = () => (dispatch) => {
+export const prevQuestion = () => (dispatch, getState) => {
+  const state = getState().exam;
   if (state.index > 0) {
     try {
       dispatch({ type: DECREMENT_INDEX });
@@ -123,7 +128,8 @@ export const getExamList = () => async (dispatch) => {
 
 // GIVEN A TITLE, GETS A LIST OF ITS CORRESPONDING CATEGORIES AND EACH
 // CATEGORIES QUESTION COUNT.
-export const getExamCategories = () => async (dispatch) => {
+export const getExamCategories = () => async (dispatch, getState) => {
+  const state = getState().exam;
   if (state.exam !== null) {
     dispatch({ type: SET_LOADING });
     const response = await axios.get(`/api/exams/${state.exam}/categories`);
@@ -131,9 +137,10 @@ export const getExamCategories = () => async (dispatch) => {
   }
 };
 
-export const updateCategories = (updatedCategories) => (dispatch) => {
+export const updateCategories = (updatedCategories) => (dispatch, getState) => {
+  const state = getState().exam;
   dispatch({ type: UPDATE_EXAM_CATEGORIES, payload: updatedCategories });
-  setCategoryString();
+  setCategoryString(state);
 };
 
 // UPDATES THE EXAM STATE WITH NEW EXAM VALUE
@@ -143,7 +150,7 @@ export const setExam = (examValue) => (dispatch) => {
 };
 
 //SETS CATEGORY SEARCH STRING FOR BACKEND API
-const setCategoryString = () => {
+const setCategoryString = (state) => {
   const categoryValues = [];
   state.categories.forEach((category) => {
     if (category.count <= 0) {

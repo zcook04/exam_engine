@@ -12,8 +12,6 @@ import Home from './components/Home/Home';
 import Forum from './components/Forum/Forum';
 import Login from './components/Auth/Login';
 
-import ExamState from './context/exam/examState';
-
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -28,22 +26,20 @@ if (localStorage.token) {
 function App() {
   return (
     <Provider store={store}>
-      <ExamState>
-        <Router>
-          <Navbar />
-          <Header />
-          <Alerts />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/exam" component={Exam} />
-            <Route exact path="/flashcards" component={Flashcards} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/logout" component={Home} />
-            <PrivateRoute exact path="/forum" component={Forum} />
-            <PrivateRoute exact path="/contribute" component={Contribute} />
-          </Switch>
-        </Router>
-      </ExamState>
+      <Router>
+        <Navbar />
+        <Header />
+        <Alerts />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/exam" component={Exam} />
+          <Route exact path="/flashcards" component={Flashcards} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/logout" component={Home} />
+          <PrivateRoute exact path="/forum" component={Forum} />
+          <PrivateRoute exact path="/contribute" component={Contribute} />
+        </Switch>
+      </Router>
     </Provider>
   );
 }

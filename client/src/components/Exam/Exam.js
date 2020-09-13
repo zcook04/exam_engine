@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ClipLoader from 'react-spinners/ClockLoader';
 
 import SearchExam from './SearchExams';
 import CurrentExam from './CurrentExam';
 import ReviewExam from './ReviewExam';
 
-import ExamContext from '../../context/exam/examContext';
 import { connect } from 'react-redux';
 
 import { loadUser } from '../../actions/authActions';
@@ -13,10 +12,9 @@ import { loadUser } from '../../actions/authActions';
 import './Exam.css';
 
 const Exam = (props) => {
-  const examContext = useContext(ExamContext);
   const { auth } = props;
 
-  const { inReview, currentQuestion, loading } = examContext;
+  const { inReview, currentQuestion, loading } = props.exam;
 
   useEffect(() => {
     auth.token !== null && auth.token && loadUser();
@@ -35,8 +33,13 @@ const Exam = (props) => {
   );
 };
 
+const mapDispatchToProps = {
+  loadUser,
+};
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  exam: state.exam,
 });
 
-export default connect(mapStateToProps, { loadUser })(Exam);
+export default connect(mapStateToProps, mapDispatchToProps)(Exam);

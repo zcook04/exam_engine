@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import './ContributeExam.css';
@@ -7,22 +7,21 @@ import { connect } from 'react-redux';
 
 import { loadUser } from '../../actions/authActions';
 import { setAlert } from '../../actions/alertActions';
-
-import ExamContext from '../../context/exam/examContext';
+import {
+  getExamList,
+  getExamCategories,
+  setExam,
+} from '../../actions/examActions';
 
 const ContributeExam = (props) => {
-  const { user } = props.auth;
-  const { setAlert } = props;
-
-  const examContext = useContext(ExamContext);
   const {
+    setAlert,
     getExamList,
     getExamCategories,
-    examList,
-    categories,
-    exam,
     setExam,
-  } = examContext;
+    auth: { user },
+    exam: { examList, categories, exam },
+  } = props;
 
   const [category, setCategory] = useState('');
   const [question, setQuestion] = useState('');
@@ -263,9 +262,18 @@ const ContributeExam = (props) => {
   );
 };
 
+const mapDispatchToProps = {
+  getExamList,
+  getExamCategories,
+  setExam,
+  loadUser,
+  setAlert,
+};
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
   alert: state.alert,
+  exam: state.exam,
 });
 
-export default connect(mapStateToProps, { loadUser, setAlert })(ContributeExam);
+export default connect(mapStateToProps, mapDispatchToProps)(ContributeExam);
