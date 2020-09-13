@@ -7,3 +7,4 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const SET_LOADING = 'SET_LOADING';
 export const CLEAR_LOADING = 'CLEAR_LOADING';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
