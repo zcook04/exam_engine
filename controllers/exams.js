@@ -34,7 +34,6 @@ getExamQuestion = async (req, res, next) => {
                 return
             }
             question = result
-            
         })} catch(err) {
             console.log('TryCaught:' +err)
         }

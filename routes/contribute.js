@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const Question = require('../models/Exam')
 
+
+// api/contribute/
 router.post('/question', async (req, res) => {
 
     const { exam, category, question, questionType, prompts, explainations, contributedBy} = req.body
