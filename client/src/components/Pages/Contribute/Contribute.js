@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import ContributeExam from './ContributeExam';
+import ContributeExamQuestion from './ContributeExamQuestion/ContributeExamQuestion';
 
 import { connect } from 'react-redux';
 import { loadUser } from '../../../actions/authActions';
@@ -13,7 +13,7 @@ const Contribute = (props) => {
 
   return (
     <div className="contibute-page">
-      <ContributeExam />
+      <ContributeExamQuestion />
     </div>
   );
 };

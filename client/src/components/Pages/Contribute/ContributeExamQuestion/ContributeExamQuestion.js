@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import './ContributeExam.css';
+import './ContributeExamQuestion.css';
 
 import { connect } from 'react-redux';
 
-import { loadUser } from '../../../actions/authActions';
-import { setAlert } from '../../../actions/alertActions';
+import { loadUser } from '../../../../actions/authActions';
+import { setAlert } from '../../../../actions/alertActions'
 import {
   getExamList,
   getExamCategories,
   setExam,
-} from '../../../actions/examActions';
+} from '../../../../actions/contributeActions';
 
 const ContributeExam = (props) => {
   const {
@@ -20,7 +20,7 @@ const ContributeExam = (props) => {
     getExamCategories,
     setExam,
     auth: { user },
-    exam: { examList, categories, exam },
+    contribute: { examList, categories, exam },
   } = props;
 
   const [category, setCategory] = useState('');
@@ -300,7 +300,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   alert: state.alert,
-  exam: state.exam,
+  contribute: state.contribute
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContributeExam);
