@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ContributeExam from './ContributeExam';
 
 import { connect } from 'react-redux';
-import { loadUser } from '../../actions/authActions';
+import { loadUser } from '../../../actions/authActions';
 
 const Contribute = (props) => {
   const { loadUser } = props;

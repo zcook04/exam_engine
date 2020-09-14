@@ -5,13 +5,13 @@ import './ContributeExam.css';
 
 import { connect } from 'react-redux';
 
-import { loadUser } from '../../actions/authActions';
-import { setAlert } from '../../actions/alertActions';
+import { loadUser } from '../../../actions/authActions';
+import { setAlert } from '../../../actions/alertActions';
 import {
   getExamList,
   getExamCategories,
   setExam,
-} from '../../actions/examActions';
+} from '../../../actions/examActions';
 
 const ContributeExam = (props) => {
   const {

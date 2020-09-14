@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import ExamCategories from './ExamCategories';
+import ExamCategories from '../ExamCategories/ExamCategories';
 
 import { connect } from 'react-redux';
 
@@ -10,7 +10,7 @@ import {
   getExamCategories,
   resetExam,
   setExam,
-} from '../../actions/examActions';
+} from '../../../../actions/examActions';
 
 const SearchExams = (props) => {
   const {

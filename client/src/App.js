@@ -3,14 +3,14 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/FloatingHambo/Navbar';
 import Header from './components/FloatingHambo/Header';
-import Exam from './components/Exam/Exam';
-import Alerts from './components/Layout/Alerts';
+import Exam from './components/Pages/Exam/Exam';
+import Alerts from './components/Alerts/Alerts';
 import setAuthToken from './utils/setAuthToken';
-import Contribute from './components/Contribute/Contribute';
-import Flashcards from './components/Flashcards/Flashcards';
-import Home from './components/Home/Home';
-import Forum from './components/Forum/Forum';
-import Login from './components/Auth/Login';
+import Contribute from './components/Pages/Contribute/Contribute';
+import Flashcards from './components/Pages/Flashcards/Flashcards';
+import Home from './components/Pages/Home/Home';
+import Forum from './components/Pages/Forum/Forum';
+import Login from './components/Pages/Login/Login';
 
 import { Provider } from 'react-redux';
 import store from './store';

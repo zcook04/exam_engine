@@ -1,0 +1,24 @@
+.question-container .reviewed-correct {
+    color: green;
+    text-align: center;
+}
+
+.question-container .reviewed-wrong {
+    color: red;
+    text-align: center;
+}
+
+.question-container .review-question {
+    cursor: pointer;
+    padding: .5rem;
+    margin: 1rem 0;
+    border: 1px solid skyblue;
+}
+
+.correct-prompt {
+    color: green;
+}
+
+.wrong-prompt {
+    text-decoration: line-through;
+}

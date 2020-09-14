@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import './Login.css';
 
-import { login, register, clearErrors } from '../../actions/authActions';
-import { setAlert } from '../../actions/alertActions';
+import { login, register, clearErrors } from '../../../actions/authActions';
+import { setAlert } from '../../../actions/alertActions';
 import { connect } from 'react-redux';
 
 const Login = (props) => {

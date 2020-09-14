@@ -2,13 +2,11 @@
     max-width: 75%;
     min-height: 50vh;
     margin: auto;
-
     border-radius: 5px;
     padding: 3rem;
 }
 
 .exam-container h3 {
-    margin-left: .5rem;
     color: #00b7c2;
 }
 

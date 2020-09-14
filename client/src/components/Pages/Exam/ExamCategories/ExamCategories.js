@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import './ExamCategories.css';
 
-import { updateCategories } from '../../actions/examActions';
+import { updateCategories } from '../../../../actions/examActions';
 
 const ExamCategories = (props) => {
   const { categories } = props.exam;

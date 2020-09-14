@@ -6,7 +6,7 @@ import {
   INCREMENT_INDEX,
   DECREMENT_INDEX,
   INITIALIZE_CURRENT_QUESTION,
-  UPDATE_ANSWER,
+  SET_SELECTED_ANSWER,
   GET_EXAMLIST,
   SET_EXAM,
   GET_ALL_EXAM_CATEGORIES,
@@ -77,10 +77,11 @@ export default (state = initialState, action) => {
         index: state.index - 1,
         currentQuestion: state.questions[state.index - 1],
       };
-    case UPDATE_ANSWER:
+    case SET_SELECTED_ANSWER:
+      const newState = { ...state };
+      newState.questions[state.index].selectedAnswer = action.payload;
       return {
-        ...state,
-        answers: { ...state.answers, ...action.payload },
+        ...newState,
       };
     case GET_EXAMLIST:
       return {

@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
 import ClipLoader from 'react-spinners/ClockLoader';
 
-import SearchExam from './SearchExams';
-import CurrentExam from './CurrentExam';
-import ReviewExam from './ReviewExam';
+import SearchExam from './SearchExams/SearchExams';
+import CurrentExam from './CurrentExam/CurrentExam';
+import ReviewExam from './ReviewExam/ReviewExam';
 
 import { connect } from 'react-redux';
 
-import { loadUser } from '../../actions/authActions';
+import { loadUser } from '../../../actions/authActions';
 
 import './Exam.css';
 
 const Exam = (props) => {
   const { auth } = props;
 
-  const { inReview, currentQuestion, loading } = props.exam;
+  const { inReview, questions, loading } = props.exam;
 
   useEffect(() => {
     auth.token !== null && auth.token && loadUser();
@@ -27,8 +27,8 @@ const Exam = (props) => {
       {loading && (
         <ClipLoader loading={loading} size={200} css={{ margin: 'auto' }} />
       )}
-      {currentQuestion !== null && !inReview && !loading && <CurrentExam />}
-      {currentQuestion !== null && inReview && !loading && <ReviewExam />}
+      {questions.length > 0 && !inReview && !loading && <CurrentExam />}
+      {questions.length > 0 && inReview && !loading && <ReviewExam />}
     </div>
   );
 };

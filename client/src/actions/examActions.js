@@ -8,7 +8,7 @@ import {
   INCREMENT_INDEX,
   DECREMENT_INDEX,
   INITIALIZE_CURRENT_QUESTION,
-  UPDATE_ANSWER,
+  SET_SELECTED_ANSWER,
   GET_EXAMLIST,
   SET_EXAM,
   GET_ALL_EXAM_CATEGORIES,
@@ -81,8 +81,8 @@ export const getQuestions = () => async (dispatch, getState) => {
 };
 
 //ADDS OR MODIFIES CURRENT EXAMS ANSWERS BASED ON QUESTION ID BEING TRUE OR FALSE
-export const updateAnswers = (newAnswer) => (dispatch) => {
-  dispatch({ type: UPDATE_ANSWER, payload: newAnswer });
+export const setSelectedAnswer = (newAnswer) => (dispatch) => {
+  dispatch({ type: SET_SELECTED_ANSWER, payload: newAnswer });
 };
 
 // RESETS EXAM PARAMETERS

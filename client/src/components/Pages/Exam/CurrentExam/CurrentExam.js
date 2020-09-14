@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ExamPrompts from './ExamPrompts';
+import ExamPrompts from '../ExamPrompts/ExamPrompts';
 
 import { connect } from 'react-redux';
 
@@ -8,7 +8,7 @@ import {
   startReview,
   nextQuestion,
   prevQuestion,
-} from '../../actions/examActions';
+} from '../../../../actions/examActions';
 
 const CurrentExam = (props) => {
   const { startReview, prevQuestion, nextQuestion } = props;
@@ -36,12 +36,12 @@ const CurrentExam = (props) => {
           return (
             <ExamPrompts
               key={prompt._id}
-              id={currentQuestion._id}
-              isAnswer={prompt.prompt.isAnswer}
-              text={prompt.prompt.text}
+              name={prompt.name}
+              text={prompt.text}
             />
           );
         })}
+
       <div id="exam-bottom-bar" className={bottomBarClass}>
         <span className="exam-nav" onClick={prevHandler}>
           Previous Question
