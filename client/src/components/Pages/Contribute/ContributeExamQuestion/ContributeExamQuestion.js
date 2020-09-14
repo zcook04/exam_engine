@@ -9,20 +9,20 @@ import { loadUser } from '../../../../actions/authActions';
 import { setAlert } from '../../../../actions/alertActions'
 import {
   getExamList,
-  getExamCategories,
-  setExam,
 } from '../../../../actions/contributeActions';
 
 const ContributeExam = (props) => {
   const {
     setAlert,
     getExamList,
-    getExamCategories,
-    setExam,
     auth: { user },
-    contribute: { examList, categories, exam },
+    contribute: { contributeExams },
   } = props;
 
+  const [categories, setCategories] = useState([])
+  const [examList, setExamList] = useState([])
+
+  const [exam, setExam] = useState('')
   const [category, setCategory] = useState('');
   const [question, setQuestion] = useState('');
   const [questionType, setQuestionType] = useState('radio');
@@ -39,13 +39,23 @@ const ContributeExam = (props) => {
     // eslint-disable-next-line
   }, []);
 
+  //UPDATES EXAM-LIST
   useEffect(() => {
-    setExam('');
+    const exams = []
+    contributeExams.forEach(examObj => exams.push(examObj.exam))
+    setExamList(exams)
     // eslint-disable-next-line
-  }, []);
+  }, [contributeExams]);
 
+  //UPDATES CATEGORIES BASED ON EXAM
   useEffect(() => {
-    getExamCategories(exam);
+    if(exam !== null && exam !== ""){
+      contributeExams.forEach(examObj => {
+        if(examObj.exam === exam){
+          setCategories([...examObj.categories])
+        }
+      })
+    }
     // eslint-disable-next-line
   }, [exam]);
 
@@ -62,7 +72,6 @@ const ContributeExam = (props) => {
     e.preventDefault();
 
     try {
-      console.log(answer);
       await axios.post('/api/contribute/question', {
         exam,
         category,
@@ -171,11 +180,11 @@ const ContributeExam = (props) => {
             >
               <optgroup name="category">
                 <option defaultValue>Select a category</option>
-                {categories !== null &&
+                {(categories !== null && categories.length > 0) &&
                   categories.map((category) => {
                     return (
-                      <option key={category.name} value={category.name}>
-                        {category.name}
+                      <option key={category} value={category}>
+                        {category}
                       </option>
                     );
                   })}
@@ -291,8 +300,6 @@ const ContributeExam = (props) => {
 
 const mapDispatchToProps = {
   getExamList,
-  getExamCategories,
-  setExam,
   loadUser,
   setAlert,
 };

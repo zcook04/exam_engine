@@ -1,16 +1,10 @@
 import {
-    SET_CONTRIBUTE_EXAM,
-    SET_CONTRIBUTE_EXAM_CATEGORIES,
-    CLEAR_CONTRIBUTE_EXAM_CATEGORIES,
     GET_CONTRIBUTE_EXAMLIST,
     SET_LOADING,
   } from '../actions/types';
   
   const initialState = {
-    categories: null,
-    exam: null,
-    examList: null,
-    loading: false,
+      contributeExams: []
   };
   
   export default (state = initialState, action) => {
@@ -21,27 +15,11 @@ import {
           loading: true,
         };
       case GET_CONTRIBUTE_EXAMLIST:
+          const newState = { ...state }
+          newState.contributeExams = action.payload
         return {
-          ...state,
-          examList: action.payload,
+          ...newState,
           loading: false,
-        };
-      case SET_CONTRIBUTE_EXAM:
-        return {
-          ...state,
-          exam: action.payload,
-          loading: false,
-        };
-      case SET_CONTRIBUTE_EXAM_CATEGORIES:
-        return {
-          ...state,
-          categories: action.payload,
-          loading: false,
-        };
-      case CLEAR_CONTRIBUTE_EXAM_CATEGORIES:
-        return {
-          ...state,
-          categories: null,
         };
       default:
         return state;

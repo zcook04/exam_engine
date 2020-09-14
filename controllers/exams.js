@@ -49,13 +49,12 @@ getExamQuestion = async (req, res, next) => {
 // RETURNS SHUFFLED ARRAY OF QUESTION OBJECTS FOR SPECIFIED EXAM
 getExamQuestions = async (req, res, next) => {
         //PULL EXAM, CATEGORIES AND QUANTITY FROM URL
-        const exam = req.params.exam.toUpperCase()
+        const exam = req.params.exam
         const categories = Object.entries(req.query)
-
         //GET ALL QUESTIONS FOR THE SPECIFIED EXAM
         let allExamQuestions = []
         try {
-            await Question.find({"exam": exam}, (err, result) =>{
+            await Question.find({exam}, (err, result) =>{
                 
                 if(err){
                     console.log(err)
@@ -66,7 +65,6 @@ getExamQuestions = async (req, res, next) => {
             })} catch(err) {
                 console.log('TryCaught:' +err)
             }
-
         // CHECK TO SEE IF CATEGORY QUERY PARAMETERS WERE ADDED
         if(categories.length >= 1) {
             return res.status(200).json(categoryQuestions(allExamQuestions, req.query))
@@ -78,7 +76,7 @@ getExamQuestions = async (req, res, next) => {
 getExamCategories = async (req, res) => {
     const { exam } = req.params
     try {
-        let allQuestions = await Question.find({"exam": exam.toUpperCase()}) 
+        let allQuestions = await Question.find({exam}) 
         const categoryPlaceholder = []
         const categories = []
 
@@ -106,7 +104,7 @@ getExamCategories = async (req, res) => {
 const categoryQuestions = (questions, categories) => {
     const filteredQuestions = []
     for (let key in categories) {
-        let currentQuestions = questions.filter(question => question.category === key.toUpperCase())
+        let currentQuestions = questions.filter(question => question.category === key)
         currentQuestions = currentQuestions.slice(0, categories[key])
         filteredQuestions.push(currentQuestions)
         }
