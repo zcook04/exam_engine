@@ -116,8 +116,6 @@ export default (state = initialState, action) => {
         ...state,
         inReview: false,
         index: 0,
-        exam: null,
-        categories: null,
         questions: [],
         currentQuestion: null,
         answers: null,

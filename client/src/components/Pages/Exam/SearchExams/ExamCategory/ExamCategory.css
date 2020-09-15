@@ -1,0 +1,42 @@
+.exam-category-card {
+    flex-basis: 175px;
+    border: 1px solid #00B7C2;
+    margin: .5rem;
+    flex-grow: 0;
+    background: #0c3d5e;
+    padding: 1rem;
+    box-shadow: 5px 5px 20px 0px #004246;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category-count {
+    text-align: center;
+    color: #00B7C2;
+    padding: 5px;
+    font-weight: 700;
+    letter-spacing: .25rem;
+    font-size: 1.2rem;
+}
+
+.category-slider {
+    padding: 5px;
+
+}
+
+#category-slider {
+    cursor: pointer;
+}
+
+.category-display-name {
+    height: 80%;
+    margin-top: 0rem;
+    padding: 5px;
+    text-align: center;
+    max-height: 75px;
+    min-height: 75px;
+    font-size: .85rem;
+    color: white;
+}

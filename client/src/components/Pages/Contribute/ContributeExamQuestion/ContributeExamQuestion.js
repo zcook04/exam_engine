@@ -6,10 +6,8 @@ import './ContributeExamQuestion.css';
 import { connect } from 'react-redux';
 
 import { loadUser } from '../../../../actions/authActions';
-import { setAlert } from '../../../../actions/alertActions'
-import {
-  getExamList,
-} from '../../../../actions/contributeActions';
+import { setAlert } from '../../../../actions/alertActions';
+import { getExamList } from '../../../../actions/contributeActions';
 
 const ContributeExam = (props) => {
   const {
@@ -19,10 +17,10 @@ const ContributeExam = (props) => {
     contribute: { contributeExams },
   } = props;
 
-  const [categories, setCategories] = useState([])
-  const [examList, setExamList] = useState([])
+  const [categories, setCategories] = useState([]);
+  const [examList, setExamList] = useState([]);
 
-  const [exam, setExam] = useState('')
+  const [exam, setExam] = useState('');
   const [category, setCategory] = useState('');
   const [question, setQuestion] = useState('');
   const [questionType, setQuestionType] = useState('radio');
@@ -41,20 +39,19 @@ const ContributeExam = (props) => {
 
   //UPDATES EXAM-LIST
   useEffect(() => {
-    const exams = []
-    contributeExams.forEach(examObj => exams.push(examObj.exam))
-    setExamList(exams)
-    // eslint-disable-next-line
+    const exams = [];
+    contributeExams.forEach((examObj) => exams.push(examObj.exam));
+    setExamList(exams);
   }, [contributeExams]);
 
   //UPDATES CATEGORIES BASED ON EXAM
   useEffect(() => {
-    if(exam !== null && exam !== ""){
-      contributeExams.forEach(examObj => {
-        if(examObj.exam === exam){
-          setCategories([...examObj.categories])
+    if (exam !== null && exam !== '') {
+      contributeExams.forEach((examObj) => {
+        if (examObj.exam === exam) {
+          setCategories([...examObj.categories]);
         }
-      })
+      });
     }
     // eslint-disable-next-line
   }, [exam]);
@@ -180,7 +177,8 @@ const ContributeExam = (props) => {
             >
               <optgroup name="category">
                 <option defaultValue>Select a category</option>
-                {(categories !== null && categories.length > 0) &&
+                {categories !== null &&
+                  categories.length > 0 &&
                   categories.map((category) => {
                     return (
                       <option key={category} value={category}>
@@ -307,7 +305,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   alert: state.alert,
-  contribute: state.contribute
+  contribute: state.contribute,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContributeExam);
