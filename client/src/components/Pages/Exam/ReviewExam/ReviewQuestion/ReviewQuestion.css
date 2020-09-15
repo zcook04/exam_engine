@@ -1,24 +1,35 @@
-.question-container .reviewed-correct {
-    color: green;
-    text-align: center;
-}
-
-.question-container .reviewed-wrong {
-    color: red;
-    text-align: center;
-}
-
 .question-container .review-question {
     cursor: pointer;
     padding: .5rem;
-    margin: 1rem 0;
-    border: 1px solid skyblue;
+    margin-top: 3rem;
+    font-size: .9rem;
+    border-bottom: 1px solid #0F161D;
 }
 
-.correct-prompt {
-    color: green;
+.reviewed-detail {
+    background: #062436;
+    border-bottom: 1px solid #0F161D;
+    border-left: 1px solid #0F161D;
+    border-right: 1px solid #0F161D;
+    width: 90%;
+    margin: auto;
+    cursor: pointer;
 }
 
-.wrong-prompt {
-    text-decoration: line-through;
+.reviewed-detail p {
+    padding: 1rem 1rem;
+
+}
+
+.reviewed-question.correct p{
+    background: rgba(0, 128, 0, 0.123);
+    
+}
+
+.reviewed-detail .review-explaination {
+    padding: 1rem;
+    letter-spacing: .1rem;
+    font-size: .9rem;
+    line-height: 1.5rem;
+    font-weight: 200;
 }

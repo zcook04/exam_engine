@@ -1,5 +1,17 @@
 .review-container {
     margin-top: 2rem;
+    background: #063448;
+    padding: 1rem;
+}
+
+.review-container h2 {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: .1rem;
+    border-bottom: 1px solid #0F161D;
+    margin-bottom: 4rem;
 }
 
 .review-container h1,

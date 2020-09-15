@@ -26,19 +26,24 @@ const ReviewQuestion = ({ question }) => {
         {question.question}
       </h3>
       {showDetailed && (
-        <>
+        <div className="reviewed-detail" onClick={handleClick}>
           {question.prompts.map((prompt) => {
             const wasCorrectAnswer = question.answer === prompt.name;
             return (
               <span
                 key={prompt._id}
-                className={wasCorrectAnswer ? 'correct-prompt' : 'wrong-prompt'}
+                className={wasCorrectAnswer ? 'reviewed-question correct' : 'reviewed-question'}
               >
                 <p>{prompt.text}</p>
               </span>
             );
           })}
-        </>
+
+          <div className="review-explaination">
+            {question.explainations.map(explanation => explanation.text)}
+          </div>
+
+          </div>
       )}
     </div>
   );
