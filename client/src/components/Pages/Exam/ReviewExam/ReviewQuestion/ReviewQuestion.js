@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types';
 
 import './ReviewQuestion.css';
@@ -15,6 +18,9 @@ const ReviewQuestion = ({ question }) => {
 
   return (
     <div className="question-container">
+      <div className="question-text">
+      {correct ? (<p><span className="correct"><FontAwesomeIcon icon={faCheckCircle} /></span></p>) :
+       (<p><span className="wrong"><FontAwesomeIcon icon={faTimesCircle} /></span></p>)}
       <h3
         onClick={handleClick}
         className={
@@ -25,6 +31,7 @@ const ReviewQuestion = ({ question }) => {
       >
         {question.question}
       </h3>
+      </div>
       {showDetailed && (
         <div className="reviewed-detail" onClick={handleClick}>
           {question.prompts.map((prompt) => {
