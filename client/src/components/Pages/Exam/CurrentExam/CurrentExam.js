@@ -30,6 +30,7 @@ const CurrentExam = (props) => {
 
   return (
     <form id="exam-form" className={!questions || inReview ? 'hidden' : ''}>
+      <div className="exam-form-container">
       <h3>{currentQuestion && currentQuestion.question}</h3>
       {currentQuestion &&
         currentQuestion.prompts.map((prompt) => {
@@ -58,6 +59,7 @@ const CurrentExam = (props) => {
             </span>
           )
         }
+      </div>
       </div>
     </form>
   );

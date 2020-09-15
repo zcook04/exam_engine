@@ -6,8 +6,21 @@
     padding: 3rem;
 }
 
+.exam-form-container {
+    background: #01494d38;
+    border-radius: 5px;;
+    padding: 1rem;
+    border: 1px solid #0f161d;
+}
+
 .exam-container h3 {
-    color: #00b7c2;
+    color: rgb(247, 241, 241);
+    font-weight: 500;
+    font-size: 1.3rem;
+    letter-spacing: .1rem;
+    line-height: 2rem;
+    border-bottom: 1px solid #0F161D;
+    padding-bottom: 1rem;
 }
 
 .exam-bottom-bar {
@@ -15,19 +28,20 @@
     justify-content: space-between;
     margin-top: 1rem;
     box-sizing: border-box;
+    color: #00B7C2;
+    border-top: 1px solid #0F161D;
+    padding-top: 1rem;
 }
 
 .exam-nav {
-    border: 2px solid #00b7c2;
     border-radius: 5px;
-    background: #000;
+    background: #0F161D;
     padding: 10px;
     cursor: pointer;
 }
 
 .exam-nav:hover {
     opacity: .8;
-    background: #111;
 }
 
 #exam.hidden {
