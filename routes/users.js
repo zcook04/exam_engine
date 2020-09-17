@@ -3,10 +3,6 @@ const router = express.Router()
 const { registerUser } = require('../controllers/users')
 const { check, validationResult } = require('express-validator')
 
-
-
-const User = require('../models/User')
-
 //ROUTE     POST api/users
 //DESC      REGISTER A USER
 //ACCESS    PUBLIC
