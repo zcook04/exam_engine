@@ -42,7 +42,6 @@ getExamList = async (_req, res) => {
 // and sets published to false
 
 addQuestion = async (req, res) => {
-    console.log(req)
     const {
         exam,
         category,
