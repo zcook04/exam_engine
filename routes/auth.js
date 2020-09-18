@@ -25,4 +25,8 @@ router.post('/', [
     loginUser(req, res)
 })
 
+// router.get('/google', async (req, res) => {
+
+// })
+
 module.exports = router
