@@ -2,7 +2,6 @@
     width: 100%;
     height: 40vh;
     position: relative;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url('/images/AdobeStock_332094489.jpeg') center center/cover;
     border-bottom: solid 2px #00b7c2;
     margin-bottom: 1rem
 }
@@ -15,3 +14,28 @@
     padding: 0;
     left: 1rem;
 }
+
+@media only screen and (min-width: 1368px) {
+    .header-main {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url('/images/banner/Banner_Widescreen.jpg') center center/cover;
+    }
+}
+
+@media only screen and (max-width: 1367px) {
+    .header-main {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url('/images/banner/Banner_PC.jpg') center center/cover;
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    .header-main {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url('/images/banner/Banner_IPAD.jpg') center center/cover;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .header-main {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url('/images/banner/Banner_Mobile.jpg') center center/cover;
+    }
+}
+
