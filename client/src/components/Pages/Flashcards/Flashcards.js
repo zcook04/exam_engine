@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { loadUser } from '../../../actions/authActions';
 
+import {SearchFlashcards} from './SearchFlashcards/SearchFlashcards'
+
 const Flashcards = (props) => {
   const { auth } = props;
   useEffect(() => {
@@ -10,7 +12,8 @@ const Flashcards = (props) => {
     // eslint-disable-next-line
   }, [auth.token]);
 
-  return <h1>FLASHCARDS</h1>;
+  return <div className="flashcard-page">
+    </div>
 };
 
 const mapStateToProps = (state) => ({
