@@ -11,6 +11,7 @@ import Flashcards from './components/Pages/Flashcards/Flashcards';
 import Home from './components/Pages/Home/Home';
 import Forum from './components/Pages/Forum/Forum';
 import Login from './components/Pages/Login/Login';
+import Background from './components/Layout/Background/Background'
 
 import { Provider } from 'react-redux';
 import store from './store';
@@ -27,6 +28,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
+        <Background />
         <Navbar />
         <Header />
         <Alerts />
