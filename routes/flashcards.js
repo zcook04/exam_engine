@@ -1,10 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { flashcardList } = require('../controllers/flashcards');
+const { titles, categories } = require('../controllers/flashcards');
 
-// GET api/flashcards/
+// GET api/flashcards/titles
 // public
 // returns array of strings representing each flashcard title
-router.get('/flashcardList', async (req, res) => await flashcardList(req, res))
+router.get('/titles', async (req, res) => await titles(req, res))
+
+// GET api/flashcards/categories
+// public
+// returns array of strings representing each flashcard title
+router.get('/categories', async (req, res) => await categories(req, res))
 
 module.exports = router;
