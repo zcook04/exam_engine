@@ -28,6 +28,7 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/contribute/', require('./routes/contribute'));
 app.use('/api/exams/', require('./routes/exams'));
+app.use('/api/flashcards/', require('./routes/flashcards'));
 
 if (process.env.PROD) {
   app.use(express.static(path.join(__dirname, 'client', 'build')));

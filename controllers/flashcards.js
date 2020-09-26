@@ -2,7 +2,7 @@
 // GET /API/FLASHCARDS/
 // RETURNS ARRAY OF FLASHCARD TITLES AS STRINGS
 flashcardList = async (req, res, next) => {
-    return null;
+    return res.status(200).json({"result": "success"})
 }
 
 
