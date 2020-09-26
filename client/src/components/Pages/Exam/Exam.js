@@ -25,7 +25,7 @@ const Exam = (props) => {
     <div className="exam-container">
       <SearchExam />
       {loading && (
-        <ClipLoader loading={loading} size={200} css={{ margin: 'auto' }} />
+        <ClipLoader loading={loading} size={200} color={'white'} css={{ margin: 'auto' }} />
       )}
       {questions.length > 0 && !inReview && !loading && <CurrentExam />}
       {questions.length > 0 && inReview && !loading && <ReviewExam />}
