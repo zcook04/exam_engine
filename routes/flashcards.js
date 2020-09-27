@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { titles, getCards, addCard } = require('../controllers/flashcards');
+const { titles, getCards, addCard, getFlashcardCategories } = require('../controllers/flashcards');
 
 // GET api/flashcards/titles
 // public
@@ -11,6 +11,13 @@ router.get('/titles', async (req, res) => await titles(req, res))
 // public
 // returns array of strings representing each flashcard title
 router.get('/getcards/:exam', async (req, res) => await getCards(req, res))
+
+// GET api/flashcards/:exam/categories
+// Will return array of objects containing specified exams
+// categories and their count
+router.get('/:exam/categories', async (req, res) => {
+    getFlashcardCategories(req, res)
+})
 
 // POST api/flashcards/addCard
 // public

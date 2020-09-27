@@ -77,6 +77,34 @@ const getCards = async (req, res, next) => {
             }
 }
 
+const getFlashcardCategories = async (req, res, next) => {
+    const { exam } = req.params
+    try {
+        let allFlashcards = await Flashcard.find({exam})
+        const categoryPlaceholder = []
+        const categories = []
+
+        allFlashcards.forEach(flashcard => {
+            if(categoryPlaceholder.indexOf(flashcard.category) === -1 ){
+                let count = 0
+                allFlashcards.forEach(innerflashcard => {
+                    if(innerflashcard.category === flashcard.category)
+                    count++
+                })
+                categoryPlaceholder.push(flashcard.category)
+                categories.push({name: flashcard.category, count, max: count })
+            }
+        })
+        if(categories.length > 0){
+            return res.status(200).json(categories)
+        }
+            
+    }catch(err) {
+        return res.status(500).json({success: false, msg: `An interal error occured: ${err}`})
+    }
+    return res.status(204).json('')
+}
+
 const flashcardsByCategory = (flashcards, categories) => {
     const filteredFlashcards = []
     for (let key in categories) {
@@ -87,4 +115,4 @@ const flashcardsByCategory = (flashcards, categories) => {
     return shuffleArray(filteredFlashcards.flat())
 }
 
-module.exports = { titles, getCards, addCard }
+module.exports = { titles, getCards, addCard, getFlashcardCategories }
