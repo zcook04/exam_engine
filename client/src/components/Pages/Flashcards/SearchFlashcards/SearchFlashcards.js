@@ -16,10 +16,7 @@ const SearchFlashcards = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const results = await axios('/api/flashcards/titles')
-      const titles = []
-      results.data.forEach(result => {
-        titles.push(result.exam)
-      })
+      const titles = results.data.map(result => result.exam)
       setFlashcardTitles(titles)
     }
     fetchData()
