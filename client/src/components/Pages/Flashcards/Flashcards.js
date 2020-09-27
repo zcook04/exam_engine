@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { loadUser } from '../../../actions/authActions';
 
-import {SearchFlashcards} from './SearchFlashcards/SearchFlashcards'
+import SearchFlashcards from './SearchFlashcards/SearchFlashcards'
 
 const Flashcards = (props) => {
   const { auth } = props;
@@ -13,6 +13,7 @@ const Flashcards = (props) => {
   }, [auth.token]);
 
   return <div className="flashcard-page">
+    <SearchFlashcards/>
     </div>
 };
 
