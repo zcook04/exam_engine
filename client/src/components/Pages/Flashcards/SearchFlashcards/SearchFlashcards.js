@@ -15,9 +15,14 @@ const SearchFlashcards = (props) => {
   //GET ALL FLASHCARD TITLES/OBJS
   useEffect(() => {
     const fetchData = async () => {
-      const results = await axios('/api/flashcards/titles')
-      const titles = results.data.map(result => result.exam)
-      setFlashcardTitles(results.data.map(result => result.exam))
+      try {
+        const results = await axios('/api/flashcards/titles')
+        setFlashcardTitles(results.data.map(result => result.exam))
+      }
+      catch (err){
+        console.error(err)
+        setFlashcardTitles([])
+      }
     }
     fetchData()
   }, [])
