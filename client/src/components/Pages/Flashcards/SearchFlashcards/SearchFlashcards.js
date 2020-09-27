@@ -17,7 +17,7 @@ const SearchFlashcards = (props) => {
     const fetchData = async () => {
       const results = await axios('/api/flashcards/titles')
       const titles = results.data.map(result => result.exam)
-      setFlashcardTitles(titles)
+      setFlashcardTitles(results.data.map(result => result.exam))
     }
     fetchData()
   }, [])
