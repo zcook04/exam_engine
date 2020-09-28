@@ -39,7 +39,7 @@
 }
 
 .flashcard-nav-button:hover {
-    opacity: 90%;
+    background: #00000034;
     cursor: pointer;
 }
 
