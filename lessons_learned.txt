@@ -8,3 +8,5 @@
 
 - When dispatching using different imported dispatchers non-unique names will cause issues.  This is due to all of the unique dipatches being combined with the combineReducer function.
     Using the types file, I should not reuse variables in different actions/dispatchers.
+
+- API endpoints should be versioned from the start.  Will need to add in versioning later.
