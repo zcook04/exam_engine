@@ -10,5 +10,5 @@ export default combineReducers({
   alert: alertReducer,
   exam: examReducer,
   contribute: contributeReducer,
-  flashcard: flashcardReducer
+  flashcards: flashcardReducer
 });

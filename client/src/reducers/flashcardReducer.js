@@ -1,29 +1,38 @@
 import {
-    SET_LOADING,
-    CLEAR_LOADING,
+    FLASHCARDS_LOADING,
+    LOAD_CARDS,
+    RESET_CARDS
   } from '../actions/types';
   
   const initialState = {
-    exam: null,
-    categories: null,
     index: 0,
     flashcards: [],
-    currentCard: null,
+    cardsLoaded: false,
     loading: false,
   };
   
   export default (state = initialState, action) => {
     switch (action.type) {
-      case SET_LOADING:
+      case FLASHCARDS_LOADING:
         return {
           ...state,
           loading: true,
         };
-      case CLEAR_LOADING:
+      case LOAD_CARDS:
         return {
           ...state,
+          flashcards: action.payload.data,
           loading: false,
-        };
+          cardsLoaded: true
+        }
+      case RESET_CARDS:
+        return {
+          ...state,
+          flashcards: [],
+          loading: false,
+          index: 0,
+          cardsLoaded: false
+        }
       default:
         return state;
     }
