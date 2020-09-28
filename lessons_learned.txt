@@ -1,0 +1,10 @@
+- Overused global redux state for exam.  State bled into contribute portion and needed to be dialed back as it was causing bugs across seperate pages. Should limit use of global 
+    state and use local props / state when it makes sense to do so.  The state being imported into most components made it harder to reuse those smaller components in other parts
+    of the project when I needed them.
+
+- Created the search exam component with limited foresight.  I needed it to be resuable for the flashcard search component and should have built it that way from the start.  Instead
+    I resolved to copy/pasting then modifying code.  This can be reworked in the future but better planning could have prevented this entirely.  I knew I wanted a flashcard search 
+    component, and it should not have been difficult for me to plan for its reuse.
+
+- When dispatching using different imported dispatchers non-unique names will cause issues.  This is due to all of the unique dipatches being combined with the combineReducer function.
+    Using the types file, I should not reuse variables in different actions/dispatchers.
