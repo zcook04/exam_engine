@@ -1,7 +1,9 @@
 import {
     FLASHCARDS_LOADING,
     LOAD_CARDS,
-    RESET_CARDS
+    RESET_CARDS,
+    INC_FLASHCARD_INDEX,
+    DEC_FLASHCARD_INDEX
   } from '../actions/types';
   
   const initialState = {
@@ -21,7 +23,7 @@ import {
       case LOAD_CARDS:
         return {
           ...state,
-          flashcards: action.payload.data,
+          flashcards: action.payload,
           loading: false,
           cardsLoaded: true
         }
@@ -32,6 +34,16 @@ import {
           loading: false,
           index: 0,
           cardsLoaded: false
+        }
+      case INC_FLASHCARD_INDEX:
+        return {
+          ...state,
+          index: state.index+=1
+        }
+      case DEC_FLASHCARD_INDEX:
+        return {
+          ...state,
+          index: state.index-=1
         }
       default:
         return state;
