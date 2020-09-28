@@ -57,28 +57,30 @@ const getCards = async (req, res, next) => {
             //PULL EXAM, CATEGORIES AND QUANTITY FROM URL
             const exam = req.params.exam
             const categories = Object.entries(req.query)
-            //GET ALL QUESTIONS FOR THE SPECIFIED EXAM
-            let allFlashcards = []
+
             try {
-                await Flashcard.find({exam}, (err, result) =>{
+                const flashcards =await Flashcard.find({exam}, (err, result) =>{
                     if(err){
                         console.log(err)
                         return
                     }
-                    allFlashcards = result
-                })} catch(err) {
-                    console.log('TryCaught:' +err)
+                })
+                
+                // CHECK TO SEE IF CATEGORY QUERY PARAMETERS WERE ADDED
+                if(categories.length >= 1) {
+                    return res.status(200).json(flashcardsByCategory(flashcards, req.query))
+                } else {
+                    return res.status(200).json(flashcards)
                 }
-            // CHECK TO SEE IF CATEGORY QUERY PARAMETERS WERE ADDED
-            if(categories.length >= 1) {
-                return res.status(200).json(flashcardsByCategory(allFlashcards, req.query))
-            } else {
-                return res.status(200).json(allFlashcards)
+            } catch(err) {
+                console.log('TryCaught:' +err)
             }
+
 }
 
 const getFlashcardCategories = async (req, res, next) => {
     const { exam } = req.params
+
     try {
         let allFlashcards = await Flashcard.find({exam})
         const categoryPlaceholder = []

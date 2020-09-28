@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import axios from 'axios'
 import FlashcardCategory from './FlashcardCategory/FlashcardCategory'
 
+import './SearchFlashcards.css'
+
 import {
   loadCards,
   resetCards
@@ -68,7 +70,7 @@ const SearchFlashcards = (props) => {
 
   return (
     <div className="exam-search-container">
-        <select onChange={flashcardHandler} name="flashcard-title" id="flashcard-title">
+      <select onChange={flashcardHandler} name="flashcard-title" id="flashcard-title">
           <optgroup label="FlashcardTitles">
             <option defaultValue>Select an exam to get started</option>
             {flashcardTitles.map(titleOpt => <option key={titleOpt} value={titleOpt} name={titleOpt}>{titleOpt}</option>)}
@@ -82,7 +84,7 @@ const SearchFlashcards = (props) => {
             max={cat.max}
             updateCategories={updateCategories}
           />)}
-    </div>
+      </div>
   );
 };
 
