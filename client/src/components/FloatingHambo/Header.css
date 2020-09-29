@@ -2,7 +2,6 @@
     width: 100%;
     height: 92px;
     position: relative;
-    border-bottom: solid 2px #00b7c2;
     margin-bottom: 1rem;
     z-index: -1;
 }
@@ -14,8 +13,4 @@
     margin: 0;
     padding: 0;
     left: 1rem;
-}
-
-.header-main {
-    background: #27272745;
 }

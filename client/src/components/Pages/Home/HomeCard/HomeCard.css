@@ -1,0 +1,51 @@
+.home-card {
+    max-width: 300px;
+    margin: auto;
+}
+
+.home-card-title {
+    background:#272727;
+    color: white;
+    font-weight: 500;
+    letter-spacing: .065rem;
+    font-size: 1.1rem;
+    padding: 1rem;
+    border-radius: 15px 15px 0 0;
+}
+
+.home-card-description {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    flex-direction: column;
+    background:#27272786;
+    color:  #DDD;
+    padding: 1rem;
+    padding-top: 2rem;
+    min-height: 250px;
+}
+
+.home-card-cta {
+    display: inline-block;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: #272727df;
+    color:  #00B7C2;
+    margin-top: 30%;
+    text-align: center;
+}
+
+.home-card-cta:hover {
+    background: #272727a1;
+    cursor: pointer;
+
+}
+
+.home-card-endcap {
+    background:#272727;
+    color: #00B7C2;
+    padding: 1rem;
+    border-radius: 0 0 15px 15px;
+    min-height: 3rem;
+}
