@@ -20,16 +20,19 @@ const Home = (props) => {
         title="Practice An Exam" 
         description="Choose from multiple exams and select questions based on categories."
         cta="Start An Exam"
+        ctaLink="/exam"
         direction="left" />
         <HomeCard 
         title="Join The Community" 
         description="Help expand the knowledge base by adding content"
         cta="Join For Free"
+        ctaLink="/login"
         direction="right" />
       <HomeCard 
         title="Practice Flashcards" 
         description="Practice flashcards based on real exams."
         cta="Flip Flashcards"
+        ctaLink="/flashcards"
         direction="left" />
 
     </div>

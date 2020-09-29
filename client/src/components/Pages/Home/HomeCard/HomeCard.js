@@ -1,9 +1,10 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 import './HomeCard.css'
 
 const HomeCard = (props) => {
-    const { title, description, cta } = props
+    const { title, description, cta, ctaLink } = props
 
     return (
         <div className="home-card">
@@ -13,7 +14,7 @@ const HomeCard = (props) => {
             <div className="home-card-description">
                 {description}
                 <span className="home-card-cta">
-                    {cta}
+                    <Link to={ctaLink}>{cta}</Link>
                 </span>
             </div>
             <div className="home-card-endcap">
