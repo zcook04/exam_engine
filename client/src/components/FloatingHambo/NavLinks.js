@@ -35,15 +35,7 @@ const NavLinks = (props) => {
       <div className={wrapperClass}>
         <h1>Hello {user ? user.name : 'Guest'}</h1>
         <ul className="navlinks-ul">
-          <NavLink
-            exact
-            to="/"
-            className="navlinks-a"
-            activeClassName="active"
-            onClick={navlinkHandler}
-          >
-            <li className="navlinks-li">Home</li>
-          </NavLink>
+          
           <NavLink to="/exam" className="navlinks-a" onClick={navlinkHandler}>
             <li className="navlinks-li">Practice An Exam</li>
           </NavLink>
