@@ -26,7 +26,7 @@
 }
 
 .home-card-cta {
-    display: inline-block;
+    display: block;
     margin-top: 1rem;
     margin-bottom: 1rem;
     padding: 1rem;
@@ -34,6 +34,8 @@
     color:  #00B7C2;
     margin-top: 30%;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .home-card-cta:hover {
@@ -50,7 +52,7 @@
     min-height: 3rem;
 }
 
-.home-card-cta a {
+.home-card a {
     text-decoration: none;
     color: #00B7C2;
 }

@@ -13,9 +13,9 @@ const HomeCard = (props) => {
             </div>
             <div className="home-card-description">
                 {description}
-                <span className="home-card-cta">
-                    <Link to={ctaLink}>{cta}</Link>
-                </span>
+                <Link to={ctaLink}><span className="home-card-cta">
+                    {cta}
+                </span></Link>
             </div>
             <div className="home-card-endcap">
                 
