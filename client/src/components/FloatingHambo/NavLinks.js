@@ -53,14 +53,6 @@ const NavLinks = (props) => {
           >
             <li className="navlinks-li">Contribute</li>
           </NavLink>
-          <NavLink
-            to="/forum"
-            className="navlinks-a"
-            activeClassName="active"
-            onClick={navlinkHandler}
-          >
-            <li className="navlinks-li">Forum</li>
-          </NavLink>
           {isAuthenticated ? (
             <NavLink
               to="/logout"
